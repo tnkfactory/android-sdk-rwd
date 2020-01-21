@@ -81,7 +81,7 @@ Proguard를 사용하실 경우 Proguard 설정내에 아래 내용을 반드시
 
 ### COPPA 설정 예시
 
-COPPA는 [미국 어린이 온라인 개인정보 보호법](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children's-privacy){: target="_blank" } 및 관련 법규입니다. 구글 에서는 앱이 13세 미만의 아동을 대상으로 서비스한다면 관련 법률을 준수하도록 하고 있습니다. 연령에 맞는 광고가 보일 수 있도록 아래의 옵션을 설정하시기 바랍니다.
+COPPA는 [미국 어린이 온라인 개인정보 보허법](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children's-privacy{: target="_blank"}) 및 관련 법규입니다. 구글 에서는 앱이 13세 미만의 아동을 대상으로 서비스한다면 관련 법률을 준수하도록 하고 있습니다. 연령에 맞는 광고가 보일 수 있도록 아래의 옵션을 설정하시기 바랍니다.
 
 ```java
 TnkSession.setCOPPA(MainActivity.this, true);
@@ -95,7 +95,7 @@ TnkSession.setCOPPA(MainActivity.this, true);
 
 게시앱(Publisher)을 위한 가이드입니다.
 
-이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](## SDK-설정하기)가 우선 선행되어야합니다.
+이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](##SDK-설정하기)가 우선 선행되어야합니다.
 
 
 
