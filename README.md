@@ -107,7 +107,7 @@ TnkSession.setCOPPA(MainActivity.this, true);
 
 게시앱(Publisher)을 위한 가이드입니다.
 
-이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](## 1.-SDK-설정하기)가 우선 선행되어야합니다.
+이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](##1. SDK-설정하기)가 우선 선행되어야합니다.
 
 
 
