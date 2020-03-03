@@ -7,11 +7,12 @@
 ### 1) 라이브러리 등록
 
 아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
-[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk-rwd/android-sdk-rwd/images/download.svg?version=6.61)](https://bintray.com/tnkfactory/android-sdk-rwd/android-sdk-rwd/6.61/link)
+
+[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk-rwd/android-sdk-rwd/images/download.svg)](https://bintray.com/tnkfactory/android-sdk-rwd/android-sdk-rwd/_latestVersion)
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:android-sdk-rwd:x.y.z'
+    implementation 'com.tnkfactory.ad:android-sdk-rwd:x.yz'
 }
 ```
 
