@@ -8,11 +8,11 @@
 
 아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
 
-[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk-rwd/android-sdk-rwd/images/download.svg)](https://bintray.com/tnkfactory/android-sdk-rwd/android-sdk-rwd/_latestVersion)
+[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk/ppi/images/download.svg)](https://bintray.com/tnkfactory/android-sdk/ppi/_latestVersion)
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:android-sdk-rwd:x.yz'
+    implementation 'com.tnkfactory.ad:ppi:x.y.z'
 }
 ```
 
