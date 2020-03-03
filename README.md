@@ -816,3 +816,884 @@ static public void getEarnPoint() {
 
 
 
+
+
+### 다. 그밖의 기능들
+
+
+
+#### 1) TnkSession.queryPublishState()
+
+Tnk 사이트의 [게시정보]에서 광고 게시 중지를 하게 되면 이후에는 사용자가 광고 목록 창을 띄워도 광고들이 나타나지 않습니다.
+그러므로 향후 광고 게시를 중지할 경우를 대비하여 화면에 충전소 버튼 자체를 보이지 않게 하는 기능을 갖추는 것이 바람직합니다.
+이를 위하여 현재 게시앱의 광고게시 상태를 조회하는 기능을 제공합니다.
+
+
+
+##### Method 
+
+  - void TnkSession.queryPublishState(Context context, boolean showProgress, ServiceCallback callback)
+
+
+
+##### Parameters
+
+| 파라메터 명칭 | 내용                                                         |
+| -------------- | ----------------------------------------------------------- |
+| context       | 현재 Activity 또는 Context 객체                              |
+| showProgress  | 서버에서 결과가 올때까지 화면에 progress dialog를 띄울지 여부를 지정 |
+| callback      | 서버에서 결과가 오면 callback 객체의 OnReturn(Context context, Object result) 메소드가 호출됩니다. 메소드 호출은 Main UI Thread 상에서 이루어 집니다. 전달된 result 객체는 Integer 객체이며 상태코드가 담겨 있습니다. 상태코드 값이 TnkSession.STATE_YES 인 경우(실제 값은 1)는 광고게시상태를 의미합니다. |
+
+
+
+##### 적용예시
+
+```java
+final Button button = (Button)findViewById(R.id.main_ad);
+
+// ... 
+
+TnkSession.queryPublishState(this, false, new ServiceCallback() {
+
+    @Override
+    public void onReturn(Context context, Object result) {
+
+        int state = (Integer)result;
+
+        if (state == TnkSession.STATE_YES) {
+            button.setVisibility(View.VISIBLE);
+        }
+    }
+});
+```
+
+
+
+
+
+#### 2) TnkSession.queryAdvertiseCount()
+
+광고 게시 상태를 확인하여 충전소 버튼을 보이게하거나 안보이게 하는 것으로도 좋지만 실제적으로 현재 적립 가능한 광고가 있는지 여부를 판단해서 버튼을 노출하는 것이 보다 바람직합니다.
+이를 위하여 현재 적립가능한 광고 정보를 확인하는 기능을 아래와 같이 제공합니다.
+
+
+
+##### Method 
+
+  - void TnkSession.queryAdvertiseCount(Context context, boolean showProgress, ServiceCallback callback)
+
+
+
+##### Parameters
+
+| 파라메터 명칭 | 내용                                                         |
+| -------------- | ----------------------------------------------------------- |
+| context       | 현재 Activity 또는 Context 객체                              |
+| showProgress  | 서버에서 결과가 올때까지 화면에 progress dialog를 띄울지 여부를 지정 |
+| callback      | 서버에서 결과가 오면 callback 객체의 OnReturn(Context context, Object result) 메소드가 호출됩니다. 메소드 호출은 Main UI Thread 상에서 이루어 집니다. 전달된 result 객체는 int[] 객체이며 int[0]는 광고 건수, int[1] 에는 적립가능한 포인트 합계가 담겨 있습니다. 만약 현재 광고 게시상태가 아니라면 int[0]에는 0이 담겨있습니다. |
+
+
+
+
+
+### 3) TnkSession.enableLogging()
+
+Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 테스트 시에는 true로 설정하시고 Release 빌드시에는 false로 설정해주시기 바랍니다.
+
+
+
+##### Method 
+
+  - void TnkSession.enableLogging(boolean trueOrFalse)
+
+
+
+
+
+### 라. 디자인 변경하기
+
+광고 리스트 화면(AdListView)는 기본 스타일을 그대로 사용하셔도 충분하지만, 원하시는 경우 매체앱과 통일감 있도록 UI를 변경하실 수 있습니다.
+
+AdListView의 UI를 변경하는 방법은 TnkStyle과 TnkLayout의 2가지 방식을 제공합니다. TnkStyle은 기본 화면 구성에서 벗어나지 않고 배경 이미지나 글자 폰트 크기, 색상 등만 변경하시고자 할 경우에 사용하시면 됩니다. 만약 기본 화면 구성과 완전히 다르게 UI를 배치하고자 하신다면 TnkLayout 기능를 사용하시어 원하는 화면 구성으로 완전히 변경하실 수 있습니다.
+
+
+
+#### 1) TnkStyle
+
+TnkStyle 기능은 기본 화면 구성은 유지하면서 화면의 이미지나 폰트 크기, 색상 등 만을 간단히 변경하고자 할 때 사용하실 수 있습니다.
+
+아래의 그림은 광고목록 창의 기본 스타일 화면과 스타일을 다르게 적용한 이미지입니다. 대부분의 구성 요소들을 모두 변경할 수 있습니다.
+
+
+
+![guid_image_01](./img/guide_image_01.png)
+
+
+
+
+
+##### 가) TnkStyle 객체
+
+스타일 변경을 위해서 화면의 구성 요소별로 미리 지정되어 있는 TnkStyle 객체들의 속성 값을 설정합니다. 
+
+TnkStyle 객체에서 공통적으로 제공하는 속성은 다음과 같습니다. 아래의 공통 속성 이외에도 화면의 구성요소에 따라 추가적으로 정의된 속성들이 존재할 수 있습니다.
+
+| 속성명          | 상세설명                                                     |
+| --------------- | ------------------------------------------------------------ |
+| background      | 배경 이미지 (Drawable의 resource ID)                         |
+| backgroundColor | 배경 색상 ARGB 값 (background 지정된 경우에는 사용되지 않음) |
+| textColor       | 글자 색상 ARGB 값                                            |
+| textSize        | 글자 크기 (DIP)                                              |
+
+
+
+##### 나) 광고 리스트 화면 스타일
+
+광고 리스트 화면과 관련된 TnkStyle 객체들은 다음과 같습니다.
+
+| TnkStyle 객체                    | 상세 설명                                                    |
+| -------------------------------- | ------------------------------------------------------------ |
+| TnkStyle.AdWall                  | 광고목록 화면 전체 속성                                      |
+| TnkStyle.AdWall.Header           | 광고목록 상단의 타이틀 영역                                  |
+| TnkStyle.AdWall.Section          | 광고목록 상단 타이틀 아래의 충전소 문구 부분                 |
+| TnkStyle.AdWall.Footer           | 광고목록 하단의 포인트 지급문의 부분                         |
+| TnkStyle.AdWall.Item             | 광고목록 리스트 Item 전체 속성                               |
+| TnkStyle.AdWall.Item.Title       | 광고목록 리스트의 앱 이름 영역                               |
+| TnkStyle.AdWall.Item.Subtitle    | 광고목록 리스트 Item의 앱 이름 하단의 설명 문구 부분         |
+| TnkStyle.AdWall.Item.Tag         | 광고목록 리스트 Item의 오른쪽 Tag 이미지 부분                |
+| TnkStyle.AdWall.Item.Tag.Free    | 무료 광고 Tag                                                |
+| TnkStyle.AdWall.Item.Tag.Paid    | 유료 광고 Tag                                                |
+| TnkStyle.AdWall.Item.Tag.Web     | 웹 이벤트 광고 Tag                                           |
+| TnkStyle.AdWall.Item.Tag.Confirm | 참여 확인 Tag                                                |
+| TnkStyle.AdWall.CloseButton      | 광고리스트 닫기 버튼 (팝업형태로 띄울 경우에 나타나는 X 버튼) |
+
+![guide_image_02](./img/guide_image_02.png)
+
+
+
+추가 설정 항목
+
+- TnkStyle.AdWall.dividerHeight : ListView의 divider 높이 지정 (pixel)
+- TnkStyle.AdWall.dividerColor : ListView의 divider 색상 (ARGB 값)
+- TnkStyle.AdWall.Item.backgroundStrip : 광고리스트 Item의 배경 이미지를 번갈아 다르게 설정하고 싶은 경우 이미지 Drawable의 resource ID를 지정 
+- TnkStyle.AdWall.Item.backgroundColor : 광고리스트 Item의 배경 색상을 번갈아 다르게 설정하고 싶은 경우 ARGB 값을 지정
+
+
+
+##### 다) 상세 화면 스타일
+
+광고를 클릭했을때 나타나는 상세 팝업 창과 관련된 TnkStyle 객체들은 다음과 같습니다.
+
+| TnkStyle 객체                               | 상세 설명                          |
+| ------------------------------------------- | ---------------------------------- |
+| TnkStyle.AdWall.Detail                      | 광고 상세설명 팝업화면의 전체 속성 |
+| TnkStyle.AdWall.Detail.Header               | 팝업 화면의 상단 부분              |
+| TnkStyle.AdWall.Detail.Header.Title         | 상단영역의 앱 이름 부분            |
+| TnkStyle.AdWall.Detail.Header.Subtitle      | 앱 이름 하단의 설명 문구 부분      |
+| TnkStyle.AdWall.Detail.Body                 | 팝업 화면의 본문 영역부분          |
+| TnkStyle.AdWall.Detail.Body.Tag             | 팝업 화면 오른쪽의 Tag 이미지 부분 |
+| TnkStyle.AdWall.Detail.Footer               | 팝업 화면의 하단 부분              |
+| TnkStyle.AdWall.Detail.Footer.ConfirmButton | 하단 이동 버튼                     |
+| TnkStyle.AdWall.Detail.Footer.CancelButton  | 하단 취소 버튼                     |
+
+![guide_image_03](./img/guide_image_03.png)
+
+
+
+##### 라) 적용예시
+
+```java
+private void setTnkStyle() {
+    TnkStyle.clear(); // clear previous style
+
+    TnkStyle.AdWall.backgroundColor = 0xff505050;
+
+    TnkStyle.AdWall.background = R.drawable.contents_title_bg;
+    TnkStyle.AdWall.dividerHeight = 1;
+    TnkStyle.AdWall.CloseButton.background = R.drawable.bt_close;
+
+    TnkStyle.AdWall.Header.background = R.drawable.contents_title_bg;
+    TnkStyle.AdWall.Header.textColor = 0xffffffff;
+    TnkStyle.AdWall.Header.textSize = 22;
+
+    TnkStyle.AdWall.Section.backgroundColor = 0xff505050;
+    TnkStyle.AdWall.Section.textColor = 0xffffffff;
+    TnkStyle.AdWall.Section.textSize = 15;
+
+    TnkStyle.AdWall.Footer.background = R.drawable.contents_title_bg;
+    TnkStyle.AdWall.Footer.textColor = 0xffffffff;
+    TnkStyle.AdWall.Footer.height = 25;
+
+    TnkStyle.AdWall.Item.background = R.drawable.list_item_bg;
+    TnkStyle.AdWall.Item.backgroundStripe = R.drawable.list_item_bg2;
+
+    TnkStyle.AdWall.Item.Title.textColor = 0xff50ff50;
+    TnkStyle.AdWall.Item.Subtitle.textColor = 0xff2c2c7c;
+    TnkStyle.AdWall.Item.Subtitle.textColor = 0xffff871c;
+
+    TnkStyle.AdWall.Item.Tag.Free.background = R.drawable.az_list_bt_free;
+    TnkStyle.AdWall.Item.Tag.Free.textColor = 0xffffffff;
+    TnkStyle.AdWall.Item.Tag.Paid.background = R.drawable.az_list_bt_pay;
+    TnkStyle.AdWall.Item.Tag.Paid.textColor = 0xffffffff;
+    TnkStyle.AdWall.Item.Tag.Web.background = R.drawable.az_list_bt_web;
+    TnkStyle.AdWall.Item.Tag.Web.textColor = 0xffffffff;
+    TnkStyle.AdWall.Item.Tag.Confirm.background = R.drawable.az_list_bt_install;
+    TnkStyle.AdWall.Item.Tag.Confirm.textColor = 0xffffffff;
+
+    TnkStyle.AdWall.Detail.Header.background = R.drawable.contents_title_bg;
+    TnkStyle.AdWall.Detail.Header.Title.textColor = 0xffffffff;
+    TnkStyle.AdWall.Detail.Header.Subtitle.textColor = 0xff000000;
+      
+    TnkStyle.AdWall.Detail.Footer.background = R.drawable.contents_title_bg;
+    TnkStyle.AdWall.Detail.Footer.ConfirmButton.background = R.drawable.btn_top_navi;
+    TnkStyle.AdWall.Detail.Footer.ConfirmButton.textColor = 0xffff5050;
+    TnkStyle.AdWall.Detail.Footer.CancelButton.background = R.drawable.btn_top_navi;
+
+    TnkStyle.AdWall.Detail.Body.backgroundColor = 0xffff871c;
+    TnkStyle.AdWall.Detail.Body.textColor = 0xffffffff;
+
+    TnkStyle.AdWall.Detail.Body.Tag.Free.background = R.drawable.az_list_bt_free;
+    TnkStyle.AdWall.Detail.Body.Tag.Free.textColor = 0xffffffff;
+    TnkStyle.AdWall.Detail.Body.Tag.Paid.background = R.drawable.az_list_bt_pay;
+    TnkStyle.AdWall.Detail.Body.Tag.Paid.textColor = 0xffffffff;
+    TnkStyle.AdWall.Detail.Body.Tag.Web.background = R.drawable.az_list_bt_web;
+    TnkStyle.AdWall.Detail.Body.Tag.Web.textColor = 0xffffffff;
+    TnkStyle.AdWall.Detail.Body.Tag.Confirm.background = R.drawable.az_list_bt_install;
+    TnkStyle.AdWall.Detail.Body.Tag.Confirm.textColor = 0xffffffff;
+ }
+
+// 광고 목록 띄우기 전에 스타일 설정한다.
+setTnkStyle();
+TnkSession.showAdList(MainActivity.this, getResources().getString(R.string.tnk_title));
+```
+
+
+
+
+
+#### 2) TnkLayout
+
+TnkStyle 기능을 사용하면 기본 구성화면의 이미지나 색상들을 손쉽게 변경할 수 있으나, 화면의 배치 자체를 바꿀 수는 없습니다.
+
+만약 화면 구성 자체를 변경하기를 원한다면 TnkLayout 기능을 사용하셔야합니다.
+
+아래 화면은 기본 화면을 TnkLayout을 사용하여 변경한 예시입니다.
+
+![guide_image_04](./img/guide_image_04.png)
+
+
+
+TnkLayout을 적용하기 위한 단계는 다음과 같습니다.
+
+1. 광고 리스트 화면 구성, 리스트 Item의 화면구성, 상세 팝업 화면구성을 위한 Layout을 XML로 정의합니다. 3가지 Layout XML을 모두 작성해야하는 것은 아니며 변경하기를 윈하는 Layout만 작성하시면됩니다.
+2. 작성한 Layout XML 내에서 정의한 구성 요소의 ID 들을 TnkLayout 객체에 지정합니다.
+3. 화면을 띄울때 TnkLayout 객체를 같이 전달합니다.
+
+
+
+##### 가) TnkLayout 객체
+
+TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모든 속성을 지정할 필요는 없습니다.
+
+| 광고 목록 화면 Layout      | 상세 설명                                                    |
+| -------------------------- | ------------------------------------------------------------ |
+| adwall                     | 광고목록 화면의 Layout을 설정하기 위한 속성                  |
+| adwall.numColumnsPortrait  | 화면이 세로 모드일때 item의 컬럼수 (기본값 : 1)              |
+| adwall.numColumnsLandscape | 화면이 가로 모드일때 item의 컬럼수 (기본값 : 2)              |
+| adwall.layout              | 광고 목록 화면의 Layout ID                                   |
+| adwall.idTitle             | 광고 목록 화면내의 상단 타이틀을 출력하기 위한 TextView의 ID |
+| adwall.idList              | 광고 목록을 출력하기 위한 ListView의 ID                      |
+| adwall.idClose             | 광고 목록 화면 닫기 용 Button 의 ID                          |
+| adwall.idHelpdesk          | 포인트 지급 문의 용 Button 의 ID                             |
+| adwall.idPrivacy           | 개인 정보 정책 Button 의 ID                                  |
+
+| 광고 항목 화면 Layout   | 상세 설명                                                    |
+| ----------------------- | ------------------------------------------------------------ |
+| adwall.item             | 광고 항목의 Layout을 설정하기 위한 속성                      |
+| adwall.item.layout      | 광고 항목 화면의 Layout ID                                   |
+| adwall.item.height      | 광고 항목 화면의 Height (DIP)                                |
+| adwall.item.idIcon      | 광고 아이콘 이미지 용 ImageView 의 ID                        |
+| adwall.item.idImage     | 광고 전면 이미지 용 ImageView 의 ID                          |
+| adwall.item.idTitle     | 광고 명칭 TextView 의 ID                                     |
+| adwall.item.idSubtitle  | 광고 설명 TextView 의 ID                                     |
+| adwall.item.idTag       | 광고 적립금 표시용 TextView 의 ID                            |
+| adwall.item.idCampnType | 광고 종류 TextView의 ID                                      |
+| adwall.item.bgItemEven  | 광고 항목 배경을 번갈이 다르게 지정하고 싶을 경우 사용.  짝수번째에 표시할 배경 이미지의 Drawable ID를 지정 |
+| adwall.item.bgItemOdd   | 광고 항목 배경을 번갈이 다르게 지정하고 싶을 경우 사용.   홀수번째에 표시할 배경 이미지의 Drawable ID를 지정 |
+| adwall.item.colorBg     | 광고 항목이 비어 있는 경우 배경 색상을 지정 (ARGB 값)        |
+| adwall.item.tag         | 광고 적립금 표시용 Tag의 배경 이미지와 색상을 정의 (아래 별도 설명) |
+
+| 광고 상세 화면 Layout    | 상세 설명                                                    |
+| ------------------------ | ------------------------------------------------------------ |
+| adwall.detail            | 광고 상세 화면의 Layout을 설정하기 위한 속성                 |
+| adwall.detail.layout     | 광고 상세 화면의 Layout ID                                   |
+| adwall.detail.idIcon     | 광고 아이콘 이미지 용 ImageView 의 ID                        |
+| adwall.detail.idTitle    | 광고 명칭 TextView 의 ID                                     |
+| adwall.detail.idSubtitle | 광고 설명 TextView 의 ID                                     |
+| adwall.detail.idTag      | 광고 적립금 표시용 TextView 의 ID                            |
+| adwall.detail.idAction   | 사용자 수행 내용 표시 TextView 의 ID                         |
+| adwall.detail.idConfirm  | 이동(광고 참여) Button 의 ID                                 |
+| adwall.detail.idCancel   | 취소 Button 의 ID                                            |
+| adwall.item.tag          | 광고 적립금 표시용 Tag의 배경 이미지와 색상을 정의 (아래 별도 설명) |
+
+| 광고 목록의 Header Layout | 상세 설명                                  |
+| ------------------------- | ------------------------------------------ |
+| adwall.header             | 광고 상단 문구 Layout을 설정하기 위한 속성 |
+| adwall.header.layout      | 광고 상단 문구 화면의 Layout ID            |
+| adwall.header.idText      | 광고 상단 문구 출력 용 TextView의 ID       |
+
+| 광고 목록의 Footer Layout | 상세 설명                                           |
+| ------------------------- | --------------------------------------------------- |
+| adwall.footer             | 광고 목록의 Footer 영역 Layout을 설정하기 위한 속성 |
+| adwall.footer.layout      | 광고 목록 Footer 화면의 Layout ID                   |
+| adwall.footer.idHelpdesk  | 포인트 지급 문의 용 Button 의 ID                    |
+| adwall.footer.idPrivacy   | 개인 정보 정책 Button 의 ID                         |
+
+| Tag 속성   | 상세 설명                                  |
+| ---------- | ------------------------------------------ |
+| bgTagFree  | 무료 앱인 경우 배경 이미지의 Drawable ID   |
+| bgTagPaid  | 유료 앱인 경우 배경 이미지의 Drawable ID   |
+| bgTagWeb   | 웹 이벤트인 경우 배경 이미지의 Drawable ID |
+| bgTagCheck | 참여 확인 대상의 배경 이미지의 Drawable ID |
+| tcTagFree  | 무료 앱인 경우 Text Color 값 (ARGB)        |
+| tcTagPaid  | 유료 앱인 경우 Text Color 값 (ARGB)        |
+| tcTagWeb   | 웹 이벤트인 경우 Text Color 값 (ARGB)      |
+| tcTagCheck | 참여 확인 대상의 Text Color 값 (ARGB)      |
+
+
+
+##### 나) 적용 예시 (1)
+
+광고 목록 화면 Layout XML 작성
+
+> myofferwall_popup.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <LinearLayout 
+        android:id="@+id/main_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/myofferwall_title_bg">
+
+            <TextView  
+                android:id="@+id/offerwall_title"
+                android:layout_width="match_parent" 
+                android:layout_height="match_parent" 
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"/>
+
+            <Button 
+                android:id="@+id/close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Close"/>
+
+        </RelativeLayout>
+
+        <ListView
+              android:id="@+id/offerwall_adlist"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:divider="#ffe5e5e5"
+              android:dividerHeight="0dp"
+              android:background="#ffe5e5e5"/>
+
+    </LinearLayout>
+</RelativeLayout>
+```
+
+
+
+광고 항목 화면 Layout XML 작성
+
+> myofferwall_item.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item">
+
+    <ImageView
+        android:id="@+id/ad_icon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:padding="4dp"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:id="@+id/ad_icon_frame"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/myofferwall_ad_icon_frame"/>
+
+    <TextView
+        android:id="@+id/ad_tag"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/ad_icon"
+        android:gravity="center"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/ad_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ad_icon_frame"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#ff020202"
+        android:textSize="15sp"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/ad_desc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ad_title"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:textColor="#ff179dce"
+        android:textSize="12sp"
+        android:maxLines="2"/>
+
+</RelativeLayout>
+```
+
+
+
+광고 상세 화면 Layout XML 작성
+
+> myofferwall_detail.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:layout_centerVertical="true"
+        android:padding="6dp"
+        android:background="@drawable/list_item_bg">
+
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/ad_tag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:id="@+id/ad_icon"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:padding="4dp"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/ad_icon_frame"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/myofferwall_ad_icon_frame"/>
+
+            <TextView
+                android:id="@+id/ad_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/ad_icon_frame"
+                android:layout_toLeftOf="@id/ad_tag"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:textColor="#ff179dce"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/ad_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/ad_icon_frame"
+                android:layout_toLeftOf="@id/ad_tag"
+                android:layout_below="@id/ad_desc"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:textColor="#ff020202"
+                android:textSize="17sp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/ad_action"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_layout"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:textColor="#ff020202"
+            android:textSize="17sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ad_action"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button 
+                android:id="@+id/ad_ok"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Confirm"/>
+
+            <Button 
+                android:id="@+id/ad_cancel"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Cancel"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+```
+
+
+
+TnkLayout 객체 생성 및 AdListView 띄우기
+
+```java
+private TnkLayout makePopupLayout() {
+	TnkLayout res = new TnkLayout();
+
+	res.adwall.numColumnsPortrait = 2;
+ 	res.adwall.numColumnsLandscape = 3;
+
+ 	res.adwall.layout = R.layout.myofferwall_popup;
+ 	res.adwall.idTitle = R.id.offerwall_title;
+ 	res.adwall.idList = R.id.offerwall_adlist;
+ 	res.adwall.idClose = R.id.close_button;
+
+ 	res.adwall.item.layout = R.layout.myofferwall_item;
+ 	res.adwall.item.height = 150;
+	res.adwall.item.idIcon = R.id.ad_icon;
+	res.adwall.item.idTitle = R.id.ad_title;
+	res.adwall.item.idSubtitle = R.id.ad_desc;
+	res.adwall.item.idTag = R.id.ad_tag;
+
+ 	//res.adwall.item.bgItemEven = R.drawable.list_item_bg;
+ 	//res.adwall.item.bgItemOdd = R.drawable.list_item_bg2;
+
+ 	res.adwall.item.tag.bgTagFree = R.drawable.az_list_bt_free;
+ 	res.adwall.item.tag.bgTagPaid = R.drawable.az_list_bt_pay;
+ 	res.adwall.item.tag.bgTagWeb = R.drawable.az_list_bt_web;
+ 	res.adwall.item.tag.bgTagCheck = R.drawable.az_list_bt_install;
+
+ 	res.adwall.item.tag.tcTagFree = 0xffffffff;
+ 	res.adwall.item.tag.tcTagPaid = 0xffffffff;
+ 	res.adwall.item.tag.tcTagWeb = 0xffffffff;
+ 	res.adwall.item.tag.tcTagCheck = 0xffffffff;
+
+ 	res.adwall.detail.layout = R.layout.myofferwall_detail;
+ 	res.adwall.detail.idIcon = R.id.ad_icon;
+ 	res.adwall.detail.idTitle = R.id.ad_title;
+ 	res.adwall.detail.idSubtitle = R.id.ad_desc;
+ 	res.adwall.detail.idTag = R.id.ad_tag;
+ 	res.adwall.detail.idAction = R.id.ad_action;
+ 	res.adwall.detail.idConfirm = R.id.ad_ok;
+ 	res.adwall.detail.idCancel = R.id.ad_cancel;
+
+ 	return res;
+}
+
+// Popup AdListView using your own layout
+TnkLayout layout = makePopupLayout();
+TnkSession.popupAdList(MainActivity.this,"Your title here", null, layout);
+```
+
+
+
+##### 다) 적용 예시
+
+광고 목록 화면 Layout XML 작성
+
+> offerwall_adlist.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ff1387da">
+
+        <TextView  
+		    android:id="@+id/offerwall_title"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:gravity="center"
+		    android:textColor="#ffffffff"
+		    android:textSize="18sp"/>
+
+        <Button 
+		    android:id="@+id/event_button"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_centerVertical="true"
+		    android:text="Event"
+		    android:visibility="invisible"/>
+
+        <Button 
+		    android:id="@+id/close_button"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:layout_centerVertical="true"
+		    android:text="Close"
+		    android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/offerwall_adlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ffe5e5e5"
+        android:dividerHeight="0dp"
+        android:background="#ffe5e5e5"/>
+
+</LinearLayout>
+```
+
+
+
+광고 항목 화면 Layout XML 작성
+
+> offerwall_adlist_item.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_frame">
+
+    <ImageView
+        android:id="@+id/ad_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/line_01"
+        android:adjustViewBounds="true"/>
+
+    <View
+        android:id="@+id/line_01"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_above="@id/ad_title"
+        android:background="#ffe0e0e0"/>
+
+    <TextView
+        android:id="@+id/ad_title"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_above="@id/ad_tag_layout"
+        android:gravity="left|center_vertical"
+        android:textColor="#ff020202"
+        android:textSize="@dimen/adlist_item_title_size"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/ad_tag_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/ad_campaign_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/ad_tag"
+            android:layout_width="@dimen/adlist_item_tag_width"
+            android:layout_height="@dimen/adlist_item_tag_height"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textSize="@dimen/adlist_item_tag_size"
+            android:singleLine="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+            
+    </RelativeLayout>
+</RelativeLayout>
+```
+
+
+
+TnkLayout 객체 생성 및 AdListView 띄우기
+
+```java
+private TnkLayout makeTnkLayout() {
+    TnkLayout res = new TnkLayout();
+
+    res.adwall.numColumnsPortrait = 1;
+    res.adwall.numColumnsLandscape = 2;
+
+    res.adwall.layout = R.layout.offerwall_adlist;
+    res.adwall.idTitle = R.id.offerwall_title;
+    res.adwall.idList = R.id.offerwall_adlist;
+
+    res.adwall.item.layout = R.layout.offerwall_adlist_item;
+
+    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        res.adwall.item.height = getResources().getDimensionPixelSize(R.dimen.adlist_item_height_portrait);
+    }
+    else {
+        res.adwall.item.height = getResources().getDimensionPixelSize(R.dimen.adlist_item_height_landscape);
+    }
+
+    res.adwall.item.idTitle = R.id.ad_title;
+    //res.adwall.item.idSubtitle = R.id.ad_desc;
+    res.adwall.item.idTag = R.id.ad_tag;
+    res.adwall.item.colorBg = 0xffe5e5e5;
+    res.adwall.item.idCampnType = R.id.ad_campaign_type;
+
+    res.adwall.item.idImage = R.id.ad_image;
+    res.adwall.imgType = TnkLayout.IMAGE_LANDSCAPE; // 전면 이미지 종류 지정
+
+    res.adwall.item.tag.pointLabelFormat = "{point}{unit}";
+
+    res.adwall.item.tag.bgTagFree = R.color.ad_tag_bg_color;
+    res.adwall.item.tag.bgTagPaid = R.color.ad_tag_bg_color;
+    res.adwall.item.tag.bgTagWeb = R.color.ad_tag_bg_color;
+    res.adwall.item.tag.bgTagCheck = R.color.ad_tag_bg_color;
+
+    res.adwall.item.tag.tcTagFree = 0xffffffff;
+    res.adwall.item.tag.tcTagPaid = 0xffffffff;
+    res.adwall.item.tag.tcTagWeb = 0xffffffff;
+    res.adwall.item.tag.tcTagCheck = 0xffffffff;
+
+    setTnkStyle();
+
+    return res;
+}
+
+private void setTnkStyle() {
+    TnkStyle.AdWall.showCloseButton = false;
+    TnkStyle.AdWall.showFooter = false;
+
+    // 리스트 아이템 캠페인 타입 리소스 설정
+    TnkStyle.AdWall.Item.CampnType.Install.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Install.textColor = 0xff1387da;
+    TnkStyle.AdWall.Item.CampnType.Install.background = R.drawable.campaign_label_01;
+    TnkStyle.AdWall.Item.CampnType.Run.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Run.textColor = 0xffff4b50;
+    TnkStyle.AdWall.Item.CampnType.Run.background = R.drawable.campaign_label_02;
+    TnkStyle.AdWall.Item.CampnType.Action.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Action.textColor = 0xffff6100;
+    TnkStyle.AdWall.Item.CampnType.Action.background = R.drawable.campaign_label_03;
+    TnkStyle.AdWall.Item.CampnType.Reservation.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Reservation.textColor = 0xff51c701;
+    TnkStyle.AdWall.Item.CampnType.Reservation.background = R.drawable.campaign_label_04;
+    TnkStyle.AdWall.Item.CampnType.SNS.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.SNS.textColor = 0xff421ee0;
+    TnkStyle.AdWall.Item.CampnType.SNS.background = R.drawable.campaign_label_05;
+    TnkStyle.AdWall.Item.CampnType.Join.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Join.textColor = 0xffca0006;
+    TnkStyle.AdWall.Item.CampnType.Join.background = R.drawable.campaign_label_06;
+    TnkStyle.AdWall.Item.CampnType.Video.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Video.textColor = 0xff00b293;
+    TnkStyle.AdWall.Item.CampnType.Video.background = R.drawable.campaign_label_07;
+    TnkStyle.AdWall.Item.CampnType.Etc.textSize = getResources().getInteger(R.integer.adlist_item_campn_type_size);
+    TnkStyle.AdWall.Item.CampnType.Etc.textColor = 0xff696969;
+    TnkStyle.AdWall.Item.CampnType.Etc.background = R.drawable.campaign_label_08;
+}
+
+// Show AdListView using your own layout
+TnkLayout layout = makeTnkLayout();
+TnkSession.showAdList(MainActivity.this, "Your title here", layout);
+```
+
+
+
+#### 3) 기본 피드형 스타일
+
+피드형 스타일 사용 설정 예시
+
+```java
+TnkSession.enableAdWallFeedStyle(MainActivity.this,true);
+TnkSession.showAdList(MainActivity.this,"Your title here");
+```
+
+
+
+아래의 그림과 같이 기본 적용된 피드형 스타일을 사용하시려면 광고 리스트 호출 시 해당 옵션을 설정하시기 바랍니다.
+
+![guide_image_05](./img/guide_image_05.png)
