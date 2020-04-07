@@ -1,10 +1,50 @@
 # Tnkfactory SDK Rwd
 
+## 목차
+
+1. [SDK 설정하기](#1-sdk-설정하기)
+
+   * [라이브러리 등록](#라이브러리-등록) 
+
+   * [Manifest 설정하기](#manifest-설정하기)
+
+   * [Proguard 사용](#proguard-사용)
+
+   * [COPPA 설정](#coppa-설정)
+
+2. [Publisher API](#2-publisher-api)
+
+   가. [광고 목록 띄우기](#가-광고-목록-띄우기)
+
+   * [유저 식별 값 설정](#유저-식별-값-설정)
+   * [광고 목록 띄우기 (Activity)](#광고-목록-띄우기-activity)
+   * [광고 목록 띄우기 (View)](#광고-목록-띄우기-view)
+   * [AdListView](#adlistview)
+   * [Listener 이용하기](#listener-이용하기)
+
+   나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
+
+   * [TnkSession.queryPoint()](#tnksessionquerypoint)
+   * [TnkSession.purchaseItem()](#tnksessionpurchaseitem)
+   * [TnkSession.withdrawPoints()](#tnksessionwithdrawpoints)
+   * [TnkSession.getEarnPoints()](#tnksessiongetearnpoints)
+
+   다. [그밖의 기능들](#다-그밖의-기능들)
+
+   * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
+   * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
+   * [TnkSession.enableLogging()](#tnksessionenablelogging)
+
+   라. [디자인 변경하기](#라-디자인-변경하기)
+
+   * [템플릿 디자인 제공](#템플릿-디자인-제공)
+   * 
+
 
 
 ## 1. SDK 설정하기
 
-### 1) 라이브러리 등록
+### 라이브러리 등록
 
 아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
 
@@ -18,9 +58,7 @@ dependencies {
 
 
 
-
-
-### 2) Manifest 설정하기
+### Manifest 설정하기
 
 #### Application ID 설정하기
 
@@ -40,10 +78,16 @@ Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이�
 
 
 
-#### uses-permission tag 설정하기
+#### 권한 설정
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
+```
+
+동영상 광고 적용 시 **ACCESS_WIFI_STATE** 권한은 필수 설정 권한입니다.
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 ```
 
 
@@ -65,9 +109,7 @@ Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이�
 
 
 
-
-
-### 3) Proguard 사용
+### Proguard 사용
 
 Proguard를 사용하실 경우 Proguard 설정내에 아래 내용을 반드시 넣어주세요.
 
@@ -77,29 +119,14 @@ Proguard를 사용하실 경우 Proguard 설정내에 아래 내용을 반드시
 
 
 
-
-
-### 4) 동영상 광고 설정
-
-동영상 광고 적용 시 ACCESS_WIFI_STATE 권한은 필수 설정 권한입니다.
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-```
-
-
-
-
-
-### 5) COPPA 설정 예시
+### COPPA 설정
 
 COPPA는 [미국 어린이 온라인 개인정보 보호법](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children's-privacy) 및 관련 법규입니다. 구글 에서는 앱이 13세 미만의 아동을 대상으로 서비스한다면 관련 법률을 준수하도록 하고 있습니다. 연령에 맞는 광고가 보일 수 있도록 아래의 옵션을 설정하시기 바랍니다.
 
 ```java
-TnkSession.setCOPPA(MainActivity.this, true);
+TnkSession.setCOPPA(MainActivity.this, true); // ON - 13세 미안 아동을 대상으로 한 서비스 일경우 사용
+TnkSession.setCOPPA(MainActivity.this, false); // OFF
 ```
-
-
 
 
 
@@ -109,7 +136,7 @@ TnkSession.setCOPPA(MainActivity.this, true);
 
 게시앱(Publisher)을 위한 가이드입니다.
 
-이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](#1.-SDK-설정하기)가 우선 선행되어야합니다.
+이를 위해서는 Tnk 사이트에서 앱 등록 및 Android프로젝트의 [SDK 설정하기](#1-sdk-설정하기)가 우선 선행되어야합니다.
 
 
 
@@ -123,17 +150,13 @@ Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 �
 
 
 
-
-
 ### 가. 광고 목록 띄우기
 
 <u>테스트 상태에서는 테스트하는 장비를 개발 장비로 등록하셔야 광고목록이 정상적으로 나타납니다.</u>
 
 
 
-
-
-#### 1) 유저 식별 값 설정
+#### 유저 식별 값 설정
 
 앱이 실행되면 우선 앱 내에서 사용자를 식별하는 고유한 ID를 아래의 API를 사용하시어 Tnk SDK에 설정하시기 바랍니다. 
 
@@ -158,9 +181,7 @@ Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 �
 
 
 
-
-
-#### 2) 광고 목록 띄우기 (Activity)
+#### 광고 목록 띄우기 (Activity)
 
 자신의 앱에서 광고 목록을 띄우기 위하여 TnkSession.showAdList() 함수를 사용합니다. 광고목록을 보여주기 위하여 새로운 Activity를 띄웁니다.
 
@@ -219,9 +240,7 @@ public void onCreate(Bundle savedInstanceState) {
 
 
 
-
-
-#### 3) 광고목록 띄우기 (View)
+#### 광고 목록 띄우기 (View)
 
 광고 목록을 현재 화면에 팝업으로 띄우기 위하여 TnkSession.popupAdList() 함수를 사용합니다. 광고목록을 보여주기 위하여 AdListView를 생성하여 현재 화면에 팝업형태로 띄워줍니다.
 
@@ -285,9 +304,7 @@ public void onCreate(Bundle savedInstanceState) {
 
 
 
-
-
-#### 4) AdListView
+#### AdListView
 
 AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개발자는 createAdListView() 메소드를 사용하여 AdListView 객체를 생성할 수 있습니다.
 
@@ -415,9 +432,7 @@ adlistView.loadAdList();
 
 
 
-
-
-#### 5) Listener 이용하기
+#### Listener 이용하기
 
 AdListView를 팝업화면으로 화면에 띄울 경우 화면이 나타나는 시점과 화면이 닫히는 시점을 알고 싶을 때 아래의 TnkAdListener 인터페이스를 사용합니다.
 
@@ -471,8 +486,6 @@ AdListView와 관련되어 TnkAdListener에서 발생하는 이벤트의 내용�
 
 
 
-
-
 ### 나. 포인트 조회 및 인출
 
 사용자가 광고참여를 통하여 획득한 포인트는 Tnk서버에서 관리되거나 앱의 자체서버에서 관리될 수 있습니다.
@@ -481,9 +494,7 @@ AdListView와 관련되어 TnkAdListener에서 발생하는 이벤트의 내용�
 
 
 
-
-
-#### 1) TnkSession.queryPoint()
+#### TnkSession.queryPoint()
 
 Tnk서버에 적립되어 있는 사용자 포인트 값을 조회합니다. 
 
@@ -588,9 +599,7 @@ static public void getPoint() {
 
 
 
-
-
-#### 2) TnkSession.purchaseItem()
+#### TnkSession.purchaseItem()
 
 TnK 서버에서는 별도로 아이템 목록을 관리하는 기능을 제공하지는 않습니다. 
 다만 게시앱에서 제공하는 아이템을 사용자가 구매할 때 Tnk 서버에 해당 포인트 만큼을 차감 할 수 있습니다. 이 API 역시 비동기 방식과 동기 방식을 모두 제공합니다.
@@ -682,9 +691,7 @@ Tnk 서버에 적립되어 있는 사용자 포인트를 차감하고 그 결과
 
 
 
-
-
-#### 3) TnkSession.withdrawPoints()
+#### TnkSession.withdrawPoints()
 
 Tnk 서버에서 관리되는 사용자 포인트 전체를 한번에 인출하는 기능입니다.
 
@@ -762,15 +769,13 @@ Tnk 서버에 적립되어 있는 사용자의 모든 포인트를 차감하고 
 
 
 
-#### Return : int
+##### Return : int
 
   - 인출된 포인트 값, 사용자에게 인출할 포인트가 없으면 0이 반환됩니다.
 
 
 
-
-
-#### 4) TnkSession.getEarnPoints()
+#### TnkSession.getEarnPoints()
 
 Tnk서버에서 사용자가 참여 가능한 모든 광고의 적립 가능한 총 포인트 값을 조회합니다. 
 동기 방식을 제공하고 있으며 별도 Thread를 생성하여 호출하셔야 합니다.
@@ -822,9 +827,7 @@ static public void getEarnPoint() {
 
 ### 다. 그밖의 기능들
 
-
-
-#### 1) TnkSession.queryPublishState()
+#### TnkSession.queryPublishState()
 
 Tnk 사이트의 [게시정보]에서 광고 게시 중지를 하게 되면 이후에는 사용자가 광고 목록 창을 띄워도 광고들이 나타나지 않습니다.
 그러므로 향후 광고 게시를 중지할 경우를 대비하여 화면에 충전소 버튼 자체를 보이지 않게 하는 기능을 갖추는 것이 바람직합니다.
@@ -871,9 +874,7 @@ TnkSession.queryPublishState(this, false, new ServiceCallback() {
 
 
 
-
-
-#### 2) TnkSession.queryAdvertiseCount()
+#### TnkSession.queryAdvertiseCount()
 
 광고 게시 상태를 확인하여 충전소 버튼을 보이게하거나 안보이게 하는 것으로도 좋지만 실제적으로 현재 적립 가능한 광고가 있는지 여부를 판단해서 버튼을 노출하는 것이 보다 바람직합니다.
 이를 위하여 현재 적립가능한 광고 정보를 확인하는 기능을 아래와 같이 제공합니다.
@@ -896,9 +897,7 @@ TnkSession.queryPublishState(this, false, new ServiceCallback() {
 
 
 
-
-
-### 3) TnkSession.enableLogging()
+### TnkSession.enableLogging()
 
 Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 테스트 시에는 true로 설정하시고 Release 빌드시에는 false로 설정해주시기 바랍니다.
 
@@ -910,174 +909,126 @@ Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 
 
 
 
-
-
 ### 라. 디자인 변경하기
 
 광고 리스트 화면(AdListView)는 기본 스타일을 그대로 사용하셔도 충분하지만, 원하시는 경우 매체앱과 통일감 있도록 UI를 변경하실 수 있습니다.
 
-AdListView의 UI를 변경하는 방법은 TnkStyle과 TnkLayout의 2가지 방식을 제공합니다. TnkStyle은 기본 화면 구성에서 벗어나지 않고 배경 이미지나 글자 폰트 크기, 색상 등만 변경하시고자 할 경우에 사용하시면 됩니다. 만약 기본 화면 구성과 완전히 다르게 UI를 배치하고자 하신다면 TnkLayout 기능를 사용하시어 원하는 화면 구성으로 완전히 변경하실 수 있습니다.
+AdListView의 UI를 변경하기 위해서 TemplateLayoutUtils와 TnkLayout 기능을 제공합니다.  TemplateLayoutUtils은 다양한 디자인을 쉽게 사용할 수 있도록 몇가지 디자인을 가지고 있으며 원하시는 디자인을 선택하여 사용하시면 됩니다. 만약 TemplateLayoutUtils에서도 원하는 디자인을 찾을 수 없고 기본 화면 구성과 완전히 다르게 UI를 배치하고자 하신다면 TnkLayout 기능를 사용하시어 원하는 화면 구성으로 완전히 변경하실 수 있습니다.
 
 
 
-#### 1) TnkStyle
+#### 템플릿 디자인 제공
 
-TnkStyle 기능은 기본 화면 구성은 유지하면서 화면의 이미지나 폰트 크기, 색상 등 만을 간단히 변경하고자 할 때 사용하실 수 있습니다.
-
-아래의 그림은 광고목록 창의 기본 스타일 화면과 스타일을 다르게 적용한 이미지입니다. 대부분의 구성 요소들을 모두 변경할 수 있습니다.
-
-
-
-![guid_image_01](./img/guide_image_01.png)
-
-
-
-
-
-##### 가) TnkStyle 객체
-
-스타일 변경을 위해서 화면의 구성 요소별로 미리 지정되어 있는 TnkStyle 객체들의 속성 값을 설정합니다. 
-
-TnkStyle 객체에서 공통적으로 제공하는 속성은 다음과 같습니다. 아래의 공통 속성 이외에도 화면의 구성요소에 따라 추가적으로 정의된 속성들이 존재할 수 있습니다.
-
-| 속성명          | 상세설명                                                     |
-| --------------- | ------------------------------------------------------------ |
-| background      | 배경 이미지 (Drawable의 resource ID)                         |
-| backgroundColor | 배경 색상 ARGB 값 (background 지정된 경우에는 사용되지 않음) |
-| textColor       | 글자 색상 ARGB 값                                            |
-| textSize        | 글자 크기 (DIP)                                              |
-
-
-
-##### 나) 광고 리스트 화면 스타일
-
-광고 리스트 화면과 관련된 TnkStyle 객체들은 다음과 같습니다.
-
-| TnkStyle 객체                    | 상세 설명                                                    |
-| -------------------------------- | ------------------------------------------------------------ |
-| TnkStyle.AdWall                  | 광고목록 화면 전체 속성                                      |
-| TnkStyle.AdWall.Header           | 광고목록 상단의 타이틀 영역                                  |
-| TnkStyle.AdWall.Section          | 광고목록 상단 타이틀 아래의 충전소 문구 부분                 |
-| TnkStyle.AdWall.Footer           | 광고목록 하단의 포인트 지급문의 부분                         |
-| TnkStyle.AdWall.Item             | 광고목록 리스트 Item 전체 속성                               |
-| TnkStyle.AdWall.Item.Title       | 광고목록 리스트의 앱 이름 영역                               |
-| TnkStyle.AdWall.Item.Subtitle    | 광고목록 리스트 Item의 앱 이름 하단의 설명 문구 부분         |
-| TnkStyle.AdWall.Item.Tag         | 광고목록 리스트 Item의 오른쪽 Tag 이미지 부분                |
-| TnkStyle.AdWall.Item.Tag.Free    | 무료 광고 Tag                                                |
-| TnkStyle.AdWall.Item.Tag.Paid    | 유료 광고 Tag                                                |
-| TnkStyle.AdWall.Item.Tag.Web     | 웹 이벤트 광고 Tag                                           |
-| TnkStyle.AdWall.Item.Tag.Confirm | 참여 확인 Tag                                                |
-| TnkStyle.AdWall.CloseButton      | 광고리스트 닫기 버튼 (팝업형태로 띄울 경우에 나타나는 X 버튼) |
-
-![guide_image_02](./img/guide_image_02.png)
-
-
-
-추가 설정 항목
-
-- TnkStyle.AdWall.dividerHeight : ListView의 divider 높이 지정 (pixel)
-- TnkStyle.AdWall.dividerColor : ListView의 divider 색상 (ARGB 값)
-- TnkStyle.AdWall.Item.backgroundStrip : 광고리스트 Item의 배경 이미지를 번갈아 다르게 설정하고 싶은 경우 이미지 Drawable의 resource ID를 지정 
-- TnkStyle.AdWall.Item.backgroundColor : 광고리스트 Item의 배경 색상을 번갈아 다르게 설정하고 싶은 경우 ARGB 값을 지정
-
-
-
-##### 다) 상세 화면 스타일
-
-광고를 클릭했을때 나타나는 상세 팝업 창과 관련된 TnkStyle 객체들은 다음과 같습니다.
-
-| TnkStyle 객체                               | 상세 설명                          |
-| ------------------------------------------- | ---------------------------------- |
-| TnkStyle.AdWall.Detail                      | 광고 상세설명 팝업화면의 전체 속성 |
-| TnkStyle.AdWall.Detail.Header               | 팝업 화면의 상단 부분              |
-| TnkStyle.AdWall.Detail.Header.Title         | 상단영역의 앱 이름 부분            |
-| TnkStyle.AdWall.Detail.Header.Subtitle      | 앱 이름 하단의 설명 문구 부분      |
-| TnkStyle.AdWall.Detail.Body                 | 팝업 화면의 본문 영역부분          |
-| TnkStyle.AdWall.Detail.Body.Tag             | 팝업 화면 오른쪽의 Tag 이미지 부분 |
-| TnkStyle.AdWall.Detail.Footer               | 팝업 화면의 하단 부분              |
-| TnkStyle.AdWall.Detail.Footer.ConfirmButton | 하단 이동 버튼                     |
-| TnkStyle.AdWall.Detail.Footer.CancelButton  | 하단 취소 버튼                     |
-
-![guide_image_03](./img/guide_image_03.png)
-
-
-
-##### 라) 적용예시
+SDK는 템플릿 디자인 16가지를 내장하고 있습니다. 내장되어 있는 디자인은 TemplateLayoutUtils을 통해 사용이 가능합니다.
 
 ```java
-private void setTnkStyle() {
-    TnkStyle.clear(); // clear previous style
+// Blue Style 
+TemplateLayoutUtils.getBlueStyle_01(); // IconItem : Basic Square / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_02(); // IconItem : Basic Square / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_05(); // IconItem : Tall Square / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_06(); // IconItem : Tall Square / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
 
-    TnkStyle.AdWall.backgroundColor = 0xff505050;
+// Red Style
+TemplateLayoutUtils.getRedStyle_01(); // IconItem : Basic Square / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_02(); // IconItem : Basic Square / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_05(); // IconItem : Tall Square / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_06(); // IconItem : Tall Square / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
 
-    TnkStyle.AdWall.background = R.drawable.contents_title_bg;
-    TnkStyle.AdWall.dividerHeight = 1;
-    TnkStyle.AdWall.CloseButton.background = R.drawable.bt_close;
-
-    TnkStyle.AdWall.Header.background = R.drawable.contents_title_bg;
-    TnkStyle.AdWall.Header.textColor = 0xffffffff;
-    TnkStyle.AdWall.Header.textSize = 22;
-
-    TnkStyle.AdWall.Section.backgroundColor = 0xff505050;
-    TnkStyle.AdWall.Section.textColor = 0xffffffff;
-    TnkStyle.AdWall.Section.textSize = 15;
-
-    TnkStyle.AdWall.Footer.background = R.drawable.contents_title_bg;
-    TnkStyle.AdWall.Footer.textColor = 0xffffffff;
-    TnkStyle.AdWall.Footer.height = 25;
-
-    TnkStyle.AdWall.Item.background = R.drawable.list_item_bg;
-    TnkStyle.AdWall.Item.backgroundStripe = R.drawable.list_item_bg2;
-
-    TnkStyle.AdWall.Item.Title.textColor = 0xff50ff50;
-    TnkStyle.AdWall.Item.Subtitle.textColor = 0xff2c2c7c;
-    TnkStyle.AdWall.Item.Subtitle.textColor = 0xffff871c;
-
-    TnkStyle.AdWall.Item.Tag.Free.background = R.drawable.az_list_bt_free;
-    TnkStyle.AdWall.Item.Tag.Free.textColor = 0xffffffff;
-    TnkStyle.AdWall.Item.Tag.Paid.background = R.drawable.az_list_bt_pay;
-    TnkStyle.AdWall.Item.Tag.Paid.textColor = 0xffffffff;
-    TnkStyle.AdWall.Item.Tag.Web.background = R.drawable.az_list_bt_web;
-    TnkStyle.AdWall.Item.Tag.Web.textColor = 0xffffffff;
-    TnkStyle.AdWall.Item.Tag.Confirm.background = R.drawable.az_list_bt_install;
-    TnkStyle.AdWall.Item.Tag.Confirm.textColor = 0xffffffff;
-
-    TnkStyle.AdWall.Detail.Header.background = R.drawable.contents_title_bg;
-    TnkStyle.AdWall.Detail.Header.Title.textColor = 0xffffffff;
-    TnkStyle.AdWall.Detail.Header.Subtitle.textColor = 0xff000000;
-      
-    TnkStyle.AdWall.Detail.Footer.background = R.drawable.contents_title_bg;
-    TnkStyle.AdWall.Detail.Footer.ConfirmButton.background = R.drawable.btn_top_navi;
-    TnkStyle.AdWall.Detail.Footer.ConfirmButton.textColor = 0xffff5050;
-    TnkStyle.AdWall.Detail.Footer.CancelButton.background = R.drawable.btn_top_navi;
-
-    TnkStyle.AdWall.Detail.Body.backgroundColor = 0xffff871c;
-    TnkStyle.AdWall.Detail.Body.textColor = 0xffffffff;
-
-    TnkStyle.AdWall.Detail.Body.Tag.Free.background = R.drawable.az_list_bt_free;
-    TnkStyle.AdWall.Detail.Body.Tag.Free.textColor = 0xffffffff;
-    TnkStyle.AdWall.Detail.Body.Tag.Paid.background = R.drawable.az_list_bt_pay;
-    TnkStyle.AdWall.Detail.Body.Tag.Paid.textColor = 0xffffffff;
-    TnkStyle.AdWall.Detail.Body.Tag.Web.background = R.drawable.az_list_bt_web;
-    TnkStyle.AdWall.Detail.Body.Tag.Web.textColor = 0xffffffff;
-    TnkStyle.AdWall.Detail.Body.Tag.Confirm.background = R.drawable.az_list_bt_install;
-    TnkStyle.AdWall.Detail.Body.Tag.Confirm.textColor = 0xffffffff;
- }
-
-// 광고 목록 띄우기 전에 스타일 설정한다.
-setTnkStyle();
-TnkSession.showAdList(MainActivity.this, getResources().getString(R.string.tnk_title));
 ```
 
 
 
+##### 사용방법 예시
+
+```java
+// 광고 목록 (Activity)
+TnkSession.showAdList(this, "Title", TemplateLayoutUtils.getBlueStyle_01());
+
+// 광고 목록 (View)
+TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01());
+```
 
 
-#### 2) TnkLayout
 
-TnkStyle 기능을 사용하면 기본 구성화면의 이미지나 색상들을 손쉽게 변경할 수 있으나, 화면의 배치 자체를 바꿀 수는 없습니다.
+##### 템플릿 디자인
 
-만약 화면 구성 자체를 변경하기를 원한다면 TnkLayout 기능을 사용하셔야합니다.
+###### BlueStyle_01
+
+![BlueStyle_01](./img/BlueStyle_01.png)
+
+###### BlueStyle_02
+
+![BlueStyle_02](./img/BlueStyle_02.png)
+
+###### BlueStyle_03
+
+![BlueStyle_03](./img/BlueStyle_03.png)
+
+###### BlueStyle_04
+
+![BlueStyle_04](./img/BlueStyle_04.png)
+
+###### BlueStyle_05
+
+![BlueStyle_05](./img/BlueStyle_05.png)
+
+###### BlueStyle_06
+
+![BlueStyle_06](./img/BlueStyle_06.png)
+
+###### BlueStyle_07
+
+![BlueStyle_07](./img/BlueStyle_07.png)
+
+###### BlueStyle_08
+
+![BlueStyle_08](./img/BlueStyle_08.png)
+
+
+
+###### RedStyle_01
+
+![RedStyle_01](./img/RedStyle_01.png)
+
+###### RedStyle_02
+
+![RedStyle_02](./img/RedStyle_02.png)
+
+###### RedStyle_03
+
+![RedStyle_03](./img/RedStyle_03.png)
+
+###### RedStyle_04
+
+![RedStyle_04](./img/RedStyle_04.png)
+###### RedStyle_05
+
+![RedStyle_05](./img/RedStyle_05.png)
+###### RedStyle_06
+
+![RedStyle_06](./img/RedStyle_06.png)
+###### RedStyle_07
+
+![RedStyle_07](./img/RedStyle_07.png)
+###### RedStyle_08
+
+![RedStyle_08](./img/RedStyle_08.png)
+
+
+
+
+
+#### TnkLayout
+
+TnkLayout 기능을 사용하면 화면 구성 자체를 원하는 UI로 변경이 가능합니다.
 
 아래 화면은 기본 화면을 TnkLayout을 사용하여 변경한 예시입니다.
 
@@ -1093,7 +1044,7 @@ TnkLayout을 적용하기 위한 단계는 다음과 같습니다.
 
 
 
-##### 가) TnkLayout 객체
+##### TnkLayout 객체
 
 TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모든 속성을 지정할 필요는 없습니다.
 
@@ -1164,7 +1115,7 @@ TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모�
 
 
 
-##### 나) 적용 예시 (1)
+##### 적용 예시 (1)
 
 광고 목록 화면 Layout XML 작성
 
@@ -1461,7 +1412,7 @@ TnkSession.popupAdList(MainActivity.this,"Your title here", null, layout);
 
 
 
-##### 다) 적용 예시
+##### 적용 예시
 
 광고 목록 화면 Layout XML 작성
 
@@ -1685,7 +1636,7 @@ TnkSession.showAdList(MainActivity.this, "Your title here", layout);
 
 
 
-#### 3) 기본 피드형 스타일
+#### 기본 피드형 스타일
 
 피드형 스타일 사용 설정 예시
 
