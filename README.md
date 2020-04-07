@@ -38,7 +38,6 @@
    라. [디자인 변경하기](#라-디자인-변경하기)
 
    * [템플릿 디자인 제공](#템플릿-디자인-제공)
-   * 
 
 
 
@@ -897,7 +896,7 @@ TnkSession.queryPublishState(this, false, new ServiceCallback() {
 
 
 
-### TnkSession.enableLogging()
+#### TnkSession.enableLogging()
 
 Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 테스트 시에는 true로 설정하시고 Release 빌드시에는 false로 설정해주시기 바랍니다.
 
@@ -1026,7 +1025,7 @@ TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01(
 
 
 
-#### TnkLayout
+#### TnkLayout (통합 오퍼월 가이드 미작성)
 
 TnkLayout 기능을 사용하면 화면 구성 자체를 원하는 UI로 변경이 가능합니다.
 
