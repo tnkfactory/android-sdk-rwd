@@ -23,34 +23,35 @@
      * [Method](#method-1)
      * [Description](#description)
      * [Parameters](#parameters-1)
-  * [적용예시](#적용예시)
+     * [적용예시](#적용예시)
    * [광고 목록 띄우기 (View)](#광고-목록-띄우기-view)
      * [Method](#method-2)
      * [Description](#description-1)
      * [Parameters](#parameters-2)
-  * [적용예시](#적용예시-1)
+     * [적용예시](#적용예시-1)
    * [AdListView](#adlistview)
-  * [Method](#method-3)
+     * [Method](#method-3)
      * [Parameters](#parameters-3)
      * [Popup Sample](#popup-sample)
      * [Embed Sample](#embed-sample)
 * [Listener 이용하기](#listener-이용하기)
-   
+  
+
 나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
-   
+
    * [TnkSession.queryPoint()](#tnksessionquerypoint)
    * [TnkSession.purchaseItem()](#tnksessionpurchaseitem)
    * [TnkSession.withdrawPoints()](#tnksessionwithdrawpoints)
    * [TnkSession.getEarnPoints()](#tnksessiongetearnpoints)
-   
+
    다. [그밖의 기능들](#다-그밖의-기능들)
-   
+
    * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
    * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
    * [TnkSession.enableLogging()](#tnksessionenablelogging)
-   
+
    라. [디자인 변경하기](#라-디자인-변경하기)
-   
+
    * [템플릿 디자인 제공](#템플릿-디자인-제공)
      * [사용방법 예시](#사용방법-예시)
      * [템플릿 디자인](#템플릿-디자인)
