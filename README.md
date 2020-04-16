@@ -21,7 +21,7 @@
      * [Parameters](#parameters)
    * [광고 목록 띄우기 (Activity)](#광고-목록-띄우기-activity)
      * [Method](#method-1)
-  * [Description](#description)
+     * [Description](#description)
      * [Parameters](#parameters-1)
   * [적용예시](#적용예시)
    * [광고 목록 띄우기 (View)](#광고-목록-띄우기-view)
