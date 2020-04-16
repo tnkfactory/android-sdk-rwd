@@ -15,7 +15,7 @@
 2. [Publisher API](#2-publisher-api)
 
    가. [광고 목록 띄우기](#가-광고-목록-띄우기)
-   
+
    * [유저 식별 값 설정](#유저-식별-값-설정)
      * [Method](#method)
      * [Parameters](#parameters)
@@ -35,28 +35,28 @@
      * [Popup Sample](#popup-sample)
      * [Embed Sample](#embed-sample)
    * [Listener 이용하기](#listener-이용하기)
-   
+
    나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
-   
+
       * [TnkSession.queryPoint()](#tnksessionquerypoint)
-   
+
    * [TnkSession.purchaseItem()](#tnksessionpurchaseitem)
    * [TnkSession.withdrawPoints()](#tnksessionwithdrawpoints)
    * [TnkSession.getEarnPoints()](#tnksessiongetearnpoints)
-   
+
    다. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
-   
+
       * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
-   
+
    * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
    * [TnkSession.enableLogging()](#tnksessionenablelogging)
-   
+
    라. [디자인 변경하기](#라-디자인-변경하기)
-   
+
       * [템플릿 디자인 제공](#템플릿-디자인-제공)
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
-   
+
    * [TnkLayout](#tnklayout)
      * [TnkLayout 객체](#tnklayout-객체)
      * [적용 예시](#적용-예시)
@@ -823,6 +823,9 @@ TnkSession.showAdList(this, "Title", TemplateLayoutUtils.getBlueStyle_01());
 
 // 광고 목록 (View)
 TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01());
+
+// AdListView
+TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
 ```
 
 ##### 템플릿 디자인
