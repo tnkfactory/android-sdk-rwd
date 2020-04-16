@@ -4,139 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff808080"
-    tools:context="com.tnkfactory.ppi.offerer.MainActivity">
-
+    tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/main_point_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="current points : " />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="current points : " />
-
-            <TextView
-                android:id="@+id/main_point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="loading..." />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/main_ad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List (activity)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_ad_popup"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List (popup)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_fad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Interstitial Ad"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/main_ad_style"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkStyle (activity)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_ad_style_popup"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkStyle (popup)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_ad_style_embed"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkStyle (embed)"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/main_ad_custom"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkLayout (activity)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_ad_custom_popup"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkLayout (popup)"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/main_ad_custom_embed"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="PPI Ad List TnkLayout (embed)"
-                android:textAllCaps="false" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/main_item"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Buy Item"
-                android:textAllCaps="false" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/main_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading..." />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_point_layout"/>
 </RelativeLayout>

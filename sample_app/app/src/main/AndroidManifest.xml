@@ -12,21 +12,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.tnkfactory.ppi.offerer.OfferwallEmbedActivity" android:theme="@android:style/Theme.NoTitleBar" />
-        <activity android:name="com.tnkfactory.ppi.offerer.MainActivity">
+        <activity android:name=".OfferwallTemplateActivity"></activity>
+        <activity
+            android:name=".OfferwallEmbedActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.tnkfactory.ad.AdWallActivity" />
-        <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tnkfactory.ad.AdMediaActivity"
+            android:screenOrientation="fullSensor" />
 
-        <!-- 공식 샘플 ID -->
-        <meta-data android:name="tnkad_app_id" android:value="30408070-4051-9322-2239-15040708030f" />
+        <!-- App ID -->
+        <meta-data
+            android:name="tnkad_app_id"
+            android:value="30408070-4051-9322-2239-15040708030f" />
     </application>
-
 </manifest>

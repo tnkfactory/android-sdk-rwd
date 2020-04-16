@@ -24,6 +24,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    // Tnk Ppi SDK
-    implementation 'com.tnkfactory.ad:ppi:1.0.1'
+    // Tnk RWD SDK
+    implementation 'com.tnkfactory.ad:rwd:7.01.1'
 }

@@ -24,46 +24,20 @@ public class OfferwallEmbedActivity extends Activity {
     	super.onCreate(savedInstanceState);
     	
     	setContentView(R.layout.activity_with_offerwall);
-    	
+
+    	// 전달 받은 템플릿 레이아웃
     	Intent intent = getIntent();
     	TnkLayout layout = intent.getParcelableExtra("tnk_layout");
     	
-    	ViewGroup viewGroup = (ViewGroup)findViewById(R.id.adlist);
-        
+    	ViewGroup viewGroup = findViewById(R.id.adlist);
+
+    	// AdListView 생성
     	AdListView offerwallView = TnkSession.createAdListView(this, layout);
     	offerwallView.setTitle("your title here.");
-    	
+
     	viewGroup.addView(offerwallView);
-    	
-    	// write your logic for UI-controls that you added in AdListView.
-    	Button eventButton = (Button)offerwallView.findViewById(R.id.event_button);
-    	if (eventButton != null) {
-	    	eventButton.setVisibility(View.VISIBLE);
-	    	eventButton.setOnClickListener(new OnClickListener() {
-	
-				@Override
-				public void onClick(View v) {
-					// your own logic  here
-				}
-	    		
-	    	});
-    	}
-    	
-    	Button closeButton = (Button)offerwallView.findViewById(R.id.close_button);
-    	if (closeButton != null) {
-	    	closeButton.setVisibility(View.VISIBLE);
-	    	closeButton.setOnClickListener(new OnClickListener() {
-	
-				@Override
-				public void onClick(View v) {
-					finish();
-				}
-	    		
-	    	});
-    	}
-    	
+
+    	// 리스트 로드
     	offerwallView.loadAdList();
 	}
-  
-
 }

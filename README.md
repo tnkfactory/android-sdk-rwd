@@ -5,11 +5,11 @@
 1. [SDK 설정하기](#1-sdk-설정하기)
 
    * [라이브러리 등록](#라이브러리-등록) 
-
    * [Manifest 설정하기](#manifest-설정하기)
-
+     * [Application ID 설정하기](#application-id-설정하기)
+     * [권한 설정](#권한-설정)
+     * [Activity tag 추가하기](#activity-tag-추가하기)
    * [Proguard 사용](#proguard-사용)
-
    * [COPPA 설정](#coppa-설정)
 
 2. [Publisher API](#2-publisher-api)
@@ -17,26 +17,40 @@
    가. [광고 목록 띄우기](#가-광고-목록-띄우기)
 
    * [유저 식별 값 설정](#유저-식별-값-설정)
+     * [Method](#method)
+     * [Parameters](#parameters)
    * [광고 목록 띄우기 (Activity)](#광고-목록-띄우기-activity)
+     * [Method](#method-1)
+  * [Description](#description)
+     * [Parameters](#parameters-1)
+  * [적용예시](#적용예시)
    * [광고 목록 띄우기 (View)](#광고-목록-띄우기-view)
+     * [Method](#method-2)
+     * [Description](#description-1)
+     * [Parameters](#parameters-2)
+  * [적용예시](#적용예시-1)
    * [AdListView](#adlistview)
-   * [Listener 이용하기](#listener-이용하기)
-
-   나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
-
+  * [Method](#method-3)
+     * [Parameters](#parameters-3)
+     * [Popup Sample](#popup-sample)
+     * [Embed Sample](#embed-sample)
+* [Listener 이용하기](#listener-이용하기)
+   
+나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
+   
    * [TnkSession.queryPoint()](#tnksessionquerypoint)
    * [TnkSession.purchaseItem()](#tnksessionpurchaseitem)
    * [TnkSession.withdrawPoints()](#tnksessionwithdrawpoints)
    * [TnkSession.getEarnPoints()](#tnksessiongetearnpoints)
-
+   
    다. [그밖의 기능들](#다-그밖의-기능들)
-
+   
    * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
    * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
    * [TnkSession.enableLogging()](#tnksessionenablelogging)
-
+   
    라. [디자인 변경하기](#라-디자인-변경하기)
-
+   
    * [템플릿 디자인 제공](#템플릿-디자인-제공)
      * [사용방법 예시](#사용방법-예시)
      * [템플릿 디자인](#템플릿-디자인)
@@ -50,11 +64,11 @@
 
 아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
 
-[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk/ppi/images/download.svg)](https://bintray.com/tnkfactory/android-sdk/ppi/_latestVersion)
+[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk/rwd/images/download.svg)](https://bintray.com/tnkfactory/android-sdk/rwd/_latestVersion)
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:ppi:x.y.z'
+    implementation 'com.tnkfactory.ad:ppi:7.01.1'
 }
 ```
 
@@ -486,7 +500,7 @@ public void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-#### [동기방식으로 호출하기]
+##### [동기방식으로 호출하기]
 
 ###### Method 
 
@@ -666,7 +680,7 @@ Tnk 서버에 적립되어 있는 사용자의 모든 포인트를 차감하고 
 Tnk서버에서 사용자가 참여 가능한 모든 광고의 적립 가능한 총 포인트 값을 조회합니다. 
 동기 방식을 제공하고 있으며 별도 Thread를 생성하여 호출하셔야 합니다.
 
-#### [동기방식으로 호출하기]
+##### [동기방식으로 호출하기]
 
 ###### Method 
 
