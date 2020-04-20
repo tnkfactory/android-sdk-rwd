@@ -1,22 +1,14 @@
-package com.tnkfactory.ppi.offerer;
+package com.tnkfactory.rwd.offerer;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.tnkfactory.ad.AdListView;
 import com.tnkfactory.ad.TnkLayout;
 import com.tnkfactory.ad.TnkSession;
 
-/**
- * You can embed tnk offerwall view into your own activities.
- * @author kimhd
- *
- */
 public class OfferwallEmbedActivity extends Activity {
 
 	@Override

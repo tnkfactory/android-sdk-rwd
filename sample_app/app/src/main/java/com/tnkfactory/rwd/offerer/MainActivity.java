@@ -1,4 +1,4 @@
-package com.tnkfactory.ppi.offerer;
+package com.tnkfactory.rwd.offerer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,21 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tnkfactory.ad.Logger;
 import com.tnkfactory.ad.ServiceCallback;
-import com.tnkfactory.ad.TnkLayout;
 import com.tnkfactory.ad.TnkSession;
-import com.tnkfactory.ad.TnkStyle;
 
 import java.util.ArrayList;
 

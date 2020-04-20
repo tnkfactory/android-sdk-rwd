@@ -1,8 +1,4 @@
-package com.tnkfactory.ppi.offerer;
-
-/**
- * Created by lineplus on 18. 2. 12..
- */
+package com.tnkfactory.rwd.offerer;
 
 public enum MainListItem {
 

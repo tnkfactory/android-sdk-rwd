@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tnkfactory.ppi.offerer">
+    package="com.tnkfactory.rwd.offerer">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OfferwallTemplateActivity"></activity>
+        <activity android:name="com.tnkfactory.rwd.offerer.OfferwallTemplateActivity"></activity>
         <activity
-            android:name=".OfferwallEmbedActivity"
+            android:name="com.tnkfactory.rwd.offerer.OfferwallEmbedActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.tnkfactory.rwd.offerer.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

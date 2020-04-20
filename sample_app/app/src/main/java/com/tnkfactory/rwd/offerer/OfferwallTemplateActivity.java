@@ -1,4 +1,4 @@
-package com.tnkfactory.ppi.offerer;
+package com.tnkfactory.rwd.offerer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
