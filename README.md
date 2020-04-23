@@ -53,13 +53,12 @@
 
    라. [디자인 변경하기](#라-디자인-변경하기)
 
+     * [TnkLayout](#tnklayout)
+       * [TnkLayout 객체](#tnklayout-객체)
+       * [적용 예시](#적용-예시)
       * [템플릿 디자인 제공](#템플릿-디자인-제공)
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
-
-   * [TnkLayout](#tnklayout)
-     * [TnkLayout 객체](#tnklayout-객체)
-     * [적용 예시](#적용-예시)
 
 ## 1. SDK 설정하기
 
@@ -788,109 +787,7 @@ Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 
 
 AdListView의 UI를 변경하기 위해서 TemplateLayoutUtils와 TnkLayout 기능을 제공합니다.  TemplateLayoutUtils은 다양한 디자인을 쉽게 사용할 수 있도록 몇가지 디자인을 가지고 있으며 원하시는 디자인을 선택하여 사용하시면 됩니다. 만약 TemplateLayoutUtils에서도 원하는 디자인을 찾을 수 없고 기본 화면 구성과 완전히 다르게 UI를 배치하고자 하신다면 TnkLayout 기능를 사용하시어 원하는 화면 구성으로 완전히 변경하실 수 있습니다.
 
-#### 템플릿 디자인 제공
-
-SDK는 템플릿 디자인 16가지를 내장하고 있습니다. 내장되어 있는 디자인은 TemplateLayoutUtils을 통해 사용이 가능합니다.
-
-```java
-// Blue Style 
-TemplateLayoutUtils.getBlueStyle_01(); // IconItem : Basic Square / FeedItem : Square
-TemplateLayoutUtils.getBlueStyle_02(); // IconItem : Basic Square / FeedItem : Button
-TemplateLayoutUtils.getBlueStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
-TemplateLayoutUtils.getBlueStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
-TemplateLayoutUtils.getBlueStyle_05(); // IconItem : Tall Square / FeedItem : Square
-TemplateLayoutUtils.getBlueStyle_06(); // IconItem : Tall Square / FeedItem : Button
-TemplateLayoutUtils.getBlueStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
-TemplateLayoutUtils.getBlueStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
-
-// Red Style
-TemplateLayoutUtils.getRedStyle_01(); // IconItem : Basic Square / FeedItem : Square
-TemplateLayoutUtils.getRedStyle_02(); // IconItem : Basic Square / FeedItem : Button
-TemplateLayoutUtils.getRedStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
-TemplateLayoutUtils.getRedStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
-TemplateLayoutUtils.getRedStyle_05(); // IconItem : Tall Square / FeedItem : Square
-TemplateLayoutUtils.getRedStyle_06(); // IconItem : Tall Square / FeedItem : Button
-TemplateLayoutUtils.getRedStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
-TemplateLayoutUtils.getRedStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
-
-```
-
-##### 사용방법 예시
-
-```java
-// 광고 목록 (Activity)
-TnkSession.showAdList(this, "Title", TemplateLayoutUtils.getBlueStyle_01());
-
-// 광고 목록 (View)
-TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01());
-
-// AdListView
-TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
-```
-
-##### 템플릿 디자인
-
-###### BlueStyle_01
-
-![BlueStyle_01](./img/BlueStyle_01.png)
-
-###### BlueStyle_02
-
-![BlueStyle_02](./img/BlueStyle_02.png)
-
-###### BlueStyle_03
-
-![BlueStyle_03](./img/BlueStyle_03.png)
-
-###### BlueStyle_04
-
-![BlueStyle_04](./img/BlueStyle_04.png)
-
-###### BlueStyle_05
-
-![BlueStyle_05](./img/BlueStyle_05.png)
-
-###### BlueStyle_06
-
-![BlueStyle_06](./img/BlueStyle_06.png)
-
-###### BlueStyle_07
-
-![BlueStyle_07](./img/BlueStyle_07.png)
-
-###### BlueStyle_08
-
-![BlueStyle_08](./img/BlueStyle_08.png)
-
-
-
-###### RedStyle_01
-
-![RedStyle_01](./img/RedStyle_01.png)
-
-###### RedStyle_02
-
-![RedStyle_02](./img/RedStyle_02.png)
-
-###### RedStyle_03
-
-![RedStyle_03](./img/RedStyle_03.png)
-
-###### RedStyle_04
-
-![RedStyle_04](./img/RedStyle_04.png)
-###### RedStyle_05
-
-![RedStyle_05](./img/RedStyle_05.png)
-###### RedStyle_06
-
-![RedStyle_06](./img/RedStyle_06.png)
-###### RedStyle_07
-
-![RedStyle_07](./img/RedStyle_07.png)
-###### RedStyle_08
-
-![RedStyle_08](./img/RedStyle_08.png)
+[<u>**템플릿 디자인 보기**</u>]((#템플릿-디자인))
 
 #### TnkLayout
 
@@ -1616,3 +1513,107 @@ public class OfferwallTemplateActivity extends AppCompatActivity {
   ...
 }
 ```
+
+#### 템플릿 디자인 제공
+
+SDK는 템플릿 디자인 16가지를 내장하고 있습니다. 내장되어 있는 디자인은 TemplateLayoutUtils을 통해 사용이 가능합니다.
+
+```java
+// Blue Style 
+TemplateLayoutUtils.getBlueStyle_01(); // IconItem : Basic Square / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_02(); // IconItem : Basic Square / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_05(); // IconItem : Tall Square / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_06(); // IconItem : Tall Square / FeedItem : Button
+TemplateLayoutUtils.getBlueStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
+TemplateLayoutUtils.getBlueStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
+
+// Red Style
+TemplateLayoutUtils.getRedStyle_01(); // IconItem : Basic Square / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_02(); // IconItem : Basic Square / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_03(); // IconItem : Basic Ellipse / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_04(); // IconItem : Basic Ellipse / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_05(); // IconItem : Tall Square / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_06(); // IconItem : Tall Square / FeedItem : Button
+TemplateLayoutUtils.getRedStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
+TemplateLayoutUtils.getRedStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
+
+```
+
+##### 사용방법 예시
+
+```java
+// 광고 목록 (Activity)
+TnkSession.showAdList(this, "Title", TemplateLayoutUtils.getBlueStyle_01());
+
+// 광고 목록 (View)
+TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01());
+
+// AdListView
+TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
+```
+
+##### 템플릿 디자인
+
+###### BlueStyle_01
+
+![BlueStyle_01](./img/BlueStyle_01.png)
+
+###### BlueStyle_02
+
+![BlueStyle_02](./img/BlueStyle_02.png)
+
+###### BlueStyle_03
+
+![BlueStyle_03](./img/BlueStyle_03.png)
+
+###### BlueStyle_04
+
+![BlueStyle_04](./img/BlueStyle_04.png)
+
+###### BlueStyle_05
+
+![BlueStyle_05](./img/BlueStyle_05.png)
+
+###### BlueStyle_06
+
+![BlueStyle_06](./img/BlueStyle_06.png)
+
+###### BlueStyle_07
+
+![BlueStyle_07](./img/BlueStyle_07.png)
+
+###### BlueStyle_08
+
+![BlueStyle_08](./img/BlueStyle_08.png)
+
+
+
+###### RedStyle_01
+
+![RedStyle_01](./img/RedStyle_01.png)
+
+###### RedStyle_02
+
+![RedStyle_02](./img/RedStyle_02.png)
+
+###### RedStyle_03
+
+![RedStyle_03](./img/RedStyle_03.png)
+
+###### RedStyle_04
+
+![RedStyle_04](./img/RedStyle_04.png)
+###### RedStyle_05
+
+![RedStyle_05](./img/RedStyle_05.png)
+###### RedStyle_06
+
+![RedStyle_06](./img/RedStyle_06.png)
+###### RedStyle_07
+
+![RedStyle_07](./img/RedStyle_07.png)
+###### RedStyle_08
+
+![RedStyle_08](./img/RedStyle_08.png)
