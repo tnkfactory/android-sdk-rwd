@@ -787,7 +787,7 @@ Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 
 
 AdListView의 UI를 변경하기 위해서 TemplateLayoutUtils와 TnkLayout 기능을 제공합니다.  TemplateLayoutUtils은 다양한 디자인을 쉽게 사용할 수 있도록 몇가지 디자인을 가지고 있으며 원하시는 디자인을 선택하여 사용하시면 됩니다. 만약 TemplateLayoutUtils에서도 원하는 디자인을 찾을 수 없고 기본 화면 구성과 완전히 다르게 UI를 배치하고자 하신다면 TnkLayout 기능를 사용하시어 원하는 화면 구성으로 완전히 변경하실 수 있습니다.
 
-[<u>**템플릿 디자인 보기**</u>]((#템플릿-디자인))
+[**템플릿 디자인 보기**](#템플릿-디자인)
 
 #### TnkLayout
 
