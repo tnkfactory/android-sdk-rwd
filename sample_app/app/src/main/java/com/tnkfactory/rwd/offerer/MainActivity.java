@@ -1,7 +1,5 @@
 package com.tnkfactory.rwd.offerer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,9 +12,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.tnkfactory.ad.Logger;
 import com.tnkfactory.ad.ServiceCallback;
 import com.tnkfactory.ad.TnkSession;
+import com.tnkfactory.ad.TnkStyle;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Sample Layout 초기화
         initLayout();
+
+        // 오퍼월 애니메이션 설정
+        TnkStyle.showAdListAnim_Enter = R.anim.slide_left_from_right;
+        TnkStyle.showAdListAnim_Exit = R.anim.zoom_out;
+        TnkStyle.finishAdListAnim_Enter = R.anim.zoom_in;
+        TnkStyle.finishAdListAnim_Exit = R.anim.slide_right_from_hold;
     }
 
     @Override

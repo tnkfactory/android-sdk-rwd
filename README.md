@@ -70,7 +70,7 @@
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:ppi:7.02.1'
+    implementation 'com.tnkfactory.ad:ppi:7.03.1'
 }
 ```
 
