@@ -201,7 +201,7 @@ Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 �
 | ------------- | ------------------------------------------------------------ |
 | context       | 현재 Activity 객체                                           |
 | title         | 광고 리스트의 타이틀을 지정함  (기본값 : 무료 포인트 받기)   |
-| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#디자인-변경하기)] 내용을 참고해주세요. |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
 ##### 적용예시
 
@@ -210,7 +210,7 @@ Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 �
 
 public void onCreate(Bundle savedInstanceState) {
 
-    // ...
+    ...
 
     final Button button = (Button)findViewById(R.id.main_ad);
 
@@ -257,8 +257,8 @@ public void onCreate(Bundle savedInstanceState) {
 | ------------- | ------------------------------------------------------------ |
 | activity      | 현재 Activity 객체                                           |
 | title         | 광고 리스트의 타이틀을 지정함  (기본값 : 무료 포인트 받기)   |
-| listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#5-Listener-이용하기)] 내용을 참고해주세요. |
-| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[라. 디자인 변경하기](#디자인-변경하기)] 내용을 참고해주세요. |
+| listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#listener-이용하기)] 내용을 참고해주세요. |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
 ##### 적용예시
 
@@ -267,7 +267,7 @@ public void onCreate(Bundle savedInstanceState) {
 
 public void onCreate(Bundle savedInstanceState) {
 
-    // ...
+    ...
 
     final Button button = (Button)findViewById(R.id.main_ad);
 
@@ -295,14 +295,18 @@ AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개�
 
 - AdListView TnkSession.createAdListView(Activity activity, boolean popupStyle)
 - AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout)
+- AdListView TnkSession.createAdListView(Activity activity, boolean popupStyle, TnkAdListener listener)
+- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout, TnkAdListener listener)
+- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout, boolean popupStyle, TnkAdListener listener)
 
 ##### Parameters
 
 | 파라메터 명칭 | 내용                                                         |
 | ------------- | ------------------------------------------------------------ |
-| context       | 현재 Activity 객체                                           |
+| activity      | 현재 Activity 객체                                           |
 | popupStyle    | 생성되는 AdListView 화면을 팝업 화면 형태(true) 또는 전체 화면 형태(false)로 지정합니다. |
-| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[라. 디자인 변경하기](#디자인-변경하기)] 내용을 참고해주세요. |
+| listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#listener-이용하기)] 내용을 참고해주세요. |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[라. 디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
 아래의 메소드들은 AdListView에서 제공하는 기능들입니다.
 
@@ -716,6 +720,28 @@ static public void getEarnPoint() {
 ```
 
 ### 다. 그밖의 기능들
+
+#### TnkSession.setAdWallListType()
+
+오퍼월 리스트 광고 타입을 설정합니다. 광고 타입으로는 보상형과 구매형 두 가지가 있으며 기본 설정은 두가지 타입 모두 나오는 것이지만 해당 기능을 통해 한가지 타입만 나오도록 설정이 가능합니다. 
+
+##### Method
+
+* void TnkSession.setAdWallListType(int listType)
+
+##### Parameters
+| 파라메터 명칭 | 내용                                                         |
+| -------------- | ----------------------------------------------------------- |
+| listType       | 오퍼월 리스트 광고 타입                         |
+
+* 사용가능한 타입의 종류는 아래와 같습니다.
+
+| 값                          | 타입                                     |
+| --------------------------- | -------------------------------------------------------------- |
+| TnkSession.AD_LIST_TYPE_DEFAULT | 보상형과 구매형 모두 표시               |
+| TnkSession.AD_LIST_TYPE_PPI | 보상형만 표시                            |
+| TnkSession.AD_LIST_TYPE_CPS| 구매형만 표시                            |
+
 
 #### TnkSession.queryPublishState()
 
