@@ -306,7 +306,7 @@ AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개�
 | activity      | 현재 Activity 객체                                           |
 | popupStyle    | 생성되는 AdListView 화면을 팝업 화면 형태(true) 또는 전체 화면 형태(false)로 지정합니다. |
 | listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#listener-이용하기)] 내용을 참고해주세요. |
-| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[라. 디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
 아래의 메소드들은 AdListView에서 제공하는 기능들입니다.
 
