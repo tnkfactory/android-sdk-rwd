@@ -44,10 +44,10 @@
    * [TnkSession.withdrawPoints()](#tnksessionwithdrawpoints)
    * [TnkSession.getEarnPoints()](#tnksessiongetearnpoints)
 
-   다. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
+   다. [그밖의 기능들](#다-그밖의-기능들)
 
-      * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
-
+      * [TnkSession.setAdWallListType()](#tnksessionsetadwalllisttype)
+   * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
    * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
    * [TnkSession.enableLogging()](#tnksessionenablelogging)
 
