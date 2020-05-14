@@ -60,16 +60,16 @@
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
    
-3. Analytics Report
+3. [Analytics Report](#3-analytics-report)
 
-   * 기본설정
-   * 필수 호출
-     * TnkSession.applicationStarted()
-   * 사용 활동 분석
-     * TnkSession.actionCompleted()
-   * 구매 활동 분석
-     * TnkSession.buyCompleted()
-   * 사용자 정보 설정
+   * [기본 설정](#기본-설정)
+   * [필수 호출](#필수-호출)
+     * [TnkSession.applicationStarted()](#tnksessionapplicationstarted)
+   * [사용 활동 분석](#사용-활동-분석)
+     * [TnkSession.actionCompleted()](#tnksessionactioncompleted)
+   * [구매 활동 분석](#구매-활동-분석)
+     * [TnkSession.buyCompleted()](#tnksessionbuycompleted)
+   * [사용자 정보 설정](#사용자-정보-설정)
 
 ## 1. SDK 설정하기
 
