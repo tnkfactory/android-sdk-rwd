@@ -1816,7 +1816,7 @@ TnkSession.actionCompleted(this, "friend_invite");
 // item_01 구매 완료시 
 TnkSession.buyCompleted(this, "item_01");
 
-//item_02 구매 완료시 
+//item_02 구매 완료시
 TnkSession.buyCompleted(this, "item_02");
 ```
 
