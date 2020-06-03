@@ -3,13 +3,13 @@
 ## 목차
 
 1. [Unity Settings](#1-unity-settings)
-* [Plugin Download](#plugin-download)
-* [Plugin Import](#plugin-import)
-* [AdnroidMenifest.xml 설정](#adnroidmenifestxml-설정)
-   * [Permission 설정](#permission-설정)
-   * [Tnk App ID 설정](#tnk-app-id-설정)
-   * [Offerwall Activity 설정](#offerwall-activity-설정)
-   * [UnityPlayer](#unityplayer-설정)
+   * [Plugin Download](#plugin-download)
+   * [Plugin Import](#plugin-import)
+   * [AdnroidMenifest.xml 설정](#adnroidmenifestxml-설정)
+     * [Permission 설정](#permission-설정)
+     * [Tnk App ID 설정](#tnk-app-id-설정)
+     * [Offerwall Activity 설정](#offerwall-activity-설정)
+     * [UnityPlayer](#unityplayer-설정)
 
 2. [Publisher API](#2-publisher-api)
 
@@ -59,18 +59,18 @@
      * [적용 예시](#적용-예시-2)
    
 3. [Interstitial Ad](#3-interstitial-ad)
-* [Incentive Interstitial Ad](#incentive-interstitial-ad)
-* [Interstitial Ad APIs](#interstitial-ad-apis)
-  * [TnkAd.Plugin - prepareInterstitialAdForPPI()](#tnkadplugin---prepareinterstitialadforppi)
-    * [Method](#method-7)
-    * [Description](#description-5)
-    * [Parameters](#parameters-7)
-  * [TnkAd.Plugin - showInterstitialAdForPPI()](#tnkadplugin---showinterstitialadforppi)
-    * [Method](#method-8)
-    * [Description](#description-6)
-    * [Parameters](#parameters-8)
-  * [EventHandler 이용하기](#eventhandler-이용하기)
-  * [Sample](#sample)
+   * [Incentive Interstitial Ad](#incentive-interstitial-ad)
+   * [Interstitial Ad APIs](#interstitial-ad-apis)
+     * [TnkAd.Plugin - prepareInterstitialAdForPPI()](#tnkadplugin---prepareinterstitialadforppi)
+       * [Method](#method-7)
+       * [Description](#description-5)
+       * [Parameters](#parameters-7)
+     * [TnkAd.Plugin - showInterstitialAdForPPI()](#tnkadplugin---showinterstitialadforppi)
+       * [Method](#method-8)
+       * [Description](#description-6)
+       * [Parameters](#parameters-8)
+     * [EventHandler 이용하기](#eventhandler-이용하기)
+     * [Sample](#sample)
 
 
 
