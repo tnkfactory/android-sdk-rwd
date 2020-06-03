@@ -146,7 +146,7 @@ COPPA는 [미국 어린이 온라인 개인정보 보호법](https://www.ftc.gov
 
 ```java
 TnkSession.setCOPPA(MainActivity.this, true); // ON - 13세 미안 아동을 대상으로 한 서비스 일경우 사용
-TnkSession.setCOPPA(MainActivity.this, false); // OFF - 기본값
+TnkSession.setCOPPA(MainActivity.this, false); // OFF
 ```
 
 ## 2. Publisher API

@@ -10,7 +10,8 @@
      * [Tnk App ID 설정](#tnk-app-id-설정)
      * [Offerwall Activity 설정](#offerwall-activity-설정)
      * [UnityPlayer](#unityplayer-설정)
-
+* [COPPA 설정](#coppa-설정)
+   
 2. [Publisher API](#2-publisher-api)
 
    가. [광고 목록 띄우기](#가-광고-목록-띄우기)
@@ -217,6 +218,25 @@ Unity 4.3 이상 버전을 사용하신다면 아래와 같이 ForwardNativeEven
   <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
   <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" /> <!-- set true -->
 </activity>
+```
+
+### COPPA 설정
+
+COPPA는 [미국 어린이 온라인 개인정보 보호법](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children's-privacy) 및 관련 법규입니다. 구글 에서는 앱이 13세 미만의 아동을 대상으로 서비스한다면 관련 법률을 준수하도록 하고 있습니다. 연령에 맞는 광고가 보일 수 있도록 아래의 옵션을 설정하시기 바랍니다.
+
+```c#
+using UnityEngine;
+using System.Collections;
+
+public class TnkUITest : MonoBehaviour {
+
+  void Start ()
+  {
+  	TnkAd.Plugin.Instance.setCOPPA(true); // ON - 13세 미안 아동을 대상으로 한 서비스 일경우 사용
+  	TnkAd.Plugin.Instance.setCOPPA(false); // OFF - 기본값
+  
+  // ...
+}
 ```
 
 ## 2. Publisher API
