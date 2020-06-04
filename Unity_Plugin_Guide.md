@@ -77,11 +77,11 @@
 
    * [기본 설정](#기본-설정)
    * [필수 호출](#필수-호출)
-     * [TnkSession.applicationStarted()](#tnksessionapplicationstarted)
+     * [TnkSession.applicationStarted()](#tnkadplugin---applicationstarted)
    * [사용 활동 분석](#사용-활동-분석)
-     * [TnkSession.actionCompleted()](#tnksessionactioncompleted)
+     * [TnkSession.actionCompleted()](#tnkadplugin---actioncompleted)
    * [구매 활동 분석](#구매-활동-분석)
-     * [TnkSession.buyCompleted()](#tnksessionbuycompleted)
+     * [TnkSession.buyCompleted()](#tnkadplugin---buycompleted)
    * [사용자 정보 설정](#사용자-정보-설정)
 
 
