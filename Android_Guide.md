@@ -1644,7 +1644,7 @@ TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
 
 ## 3. Analytics Report
 
-Analytics 적용을 위해서는 Tnk 사이트에서 앱 등록 및 Android 프로젝트 상의 SDK 관련 설정이 우선 선행되어야합니다.
+Analytics 적용을 위해서는 Tnk 사이트에서 앱 등록 및 프로젝트 상의 SDK 관련 설정이 우선 선행되어야합니다.
 
 [[SDK 설정하기](#1-sdk-설정하기)]의 내용을 우선 확인해주세요.
 
@@ -1733,7 +1733,11 @@ SDK가 요구하는 permission들을 추가합니다.
 | ------------- | ------------ |
 | context       | Context 객체 |
 
+##### 적용 예시
 
+```java
+TnkSession.applicationStarted()
+```
 
 ### 사용 활동 분석
 
@@ -1759,6 +1763,8 @@ SDK가 요구하는 permission들을 추가합니다.
 | -------------------- | ------------------------------------------------------------ |
 | context       | Context 객체                                                 |
 | actionName    | 사용자 액션을 구별하기 위한 문자열 (예를 들어 "user_login" 등) 사용하시는 actionName 들은 모두 Tnk 사이트의 분석보고서 화면에서 등록되어야 합니다. |
+
+##### 적용 예시
 
 ```java
 // 추가 데이터 다운로드 완료시 
@@ -1796,6 +1802,8 @@ TnkSession.actionCompleted(this, "friend_invite");
 | ------------- | ----------------------------------------------------------- |
 | context       | Context 객체                                                |
 | itemName      | 구매한 item을 구별하기 위한 문자열 (예를 들어 "item_01" 등) |
+
+##### 적용 예시
 
 ```java
 // item_01 구매 완료시 
