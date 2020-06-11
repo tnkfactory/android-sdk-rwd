@@ -445,7 +445,7 @@ namespace TnkAd {
 
 EventHandler를 사용하기 위해서 다음과 같이 진행하세요.
 
-1. 우선 새로운 스크립트를 생성하시고 상위 클래스를 EventHandler를 변경합니다.
+1. 우선 새로운 스크립트를 생성하시고 상위 클래스를 EventHandler로 변경합니다.
 2. 처리해야할 메소드를 override 하여 구현합니다. (EventHandler의 모든 메소드를 override 하실 필요는 없습니다. 처리해야햘 메소드만 구현하세요.)
 3. 구현된 클래스를 Unity의 Scene 화면의 GameObject 객체에 추가합니다. (기존의 GameObject에 추가하셔도 되고 새로운 GameObject를 생성하시어 추가하여도 상관없습니다.)
 4. Unity Inspector 화면에서 추가한 스크립트의 Handler Name 속성에 이름을 지정합니다. 여기에 지정된 이름이 TnkAd.Plugin의 API 호출시 사용됩니다.
@@ -720,7 +720,7 @@ EventHandler 에 대한 자세한 내용은 [[EventHandler]](#나-eventhandler) 
 * onLoad() : prepareInterstitialAdForPPI() 호출하여 전면광고를 성공적으로 가져온 경우 호출됩니다. 만약 전면광고가 도착하기 전에 showInterstitialAdForPPI() 가 호출되었다면 이후 전면광고 도착시 onLoad() 가 호출되지 않고 바로 전면광고가 보여지면서 onShow()가 호출됩니다.
 * onShow() : 전면광고가 화면에 나타날 때 호출됩니다.
 
-### Sample
+#### Sample
 
 아래의 예시는 EventHandler를 사용하여 광고가 로딩되는 시점에 앱의 상태를 판단하여 광고를 띄울지 말지 결정하는 방식의 구현 예시입니다.
 
