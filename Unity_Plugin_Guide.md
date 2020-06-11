@@ -10,8 +10,7 @@
      * [Tnk App ID 설정](#tnk-app-id-설정)
      * [Offerwall Activity 설정](#offerwall-activity-설정)
      * [UnityPlayer](#unityplayer-설정)
-* [COPPA 설정](#coppa-설정)
-  
+   * [COPPA 설정](#coppa-설정)
 2. [Publisher API](#2-publisher-api)
 
    가. [광고 목록 띄우기](#가-광고-목록-띄우기)
