@@ -14,8 +14,12 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 
 ### Update Notice
 
+* 2020.06.26
+  * Android SDK v7.05.1 업데이트
+    * 내부 기능 개선
 * 2020.06.03
   * Android SDK v7.04.1 업데이트
+    * 내부 기능 개선
 
 
 
@@ -27,6 +31,8 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 
 ### Update Notice
 
+* 2020.06.26
+  * Android SDK v7.05.1 적용
 * 2020.06.03
   * Android SDK v7.04.1 적용
 
