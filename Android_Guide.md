@@ -59,11 +59,11 @@
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
 
-   마.[Callback URL](#마-callback-url)
+   마. [Callback URL](#마-callback-url)
 
-   * 호출방식
-   * Parameters
-   * 리턴값처리
+   * [호출방식](#호출방식)
+   * [Parameters](#parameters-13)
+   * [리턴값처리](#리턴값-처리)
 
 3. [Analytics Report](#3-analytics-report)
 
