@@ -54,7 +54,7 @@
 
      * [TnkLayout](#tnklayout)
        * [TnkLayout 객체](#tnklayout-객체)
-       * [적용 예시](#적용-예시)
+       * [적용예시](#적용예시- 2)
       * [템플릿 디자인 제공](#템플릿-디자인-제공)
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
@@ -948,7 +948,7 @@ TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모�
 | pointUnitFormat | 포인트 단위 TextView 의 포맷                            |
 
 
-##### 적용 예시
+##### 적용예시
 
 ###### 광고 목록 화면 Layout XML 작성
 
@@ -1856,7 +1856,7 @@ TnkSession.applicationStarted()
 | context       | Context 객체                                                 |
 | actionName    | 사용자 액션을 구별하기 위한 문자열 (예를 들어 "user_login" 등) 사용하시는 actionName 들은 모두 Tnk 사이트의 분석보고서 화면에서 등록되어야 합니다. |
 
-##### 적용 예시
+##### 적용예시
 
 ```java
 // 추가 데이터 다운로드 완료시 
@@ -1895,7 +1895,7 @@ TnkSession.actionCompleted(this, "friend_invite");
 | context       | Context 객체                                                |
 | itemName      | 구매한 item을 구별하기 위한 문자열 (예를 들어 "item_01" 등) |
 
-##### 적용 예시
+##### 적용예시
 
 ```java
 // item_01 구매 완료시 
