@@ -58,6 +58,8 @@
       * [템플릿 디자인 제공](#템플릿-디자인-제공)
            * [사용방법 예시](#사용방법-예시)
            * [템플릿 디자인](#템플릿-디자인)
+   * [문의하기, 스타일 변경, 닫기 버튼 기능 구현]()
+        * [적용예시](#적용예시-7)
 
    마. [Callback URL](#마-callback-url)
 
@@ -1649,7 +1651,164 @@ TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
 
 ![RedStyle_08](./img/RedStyle_08.png)
 
+#### 문의하기, 스타일 변경, 닫기 버튼 기능 구현
 
+TnkLayout을 사용하면 통합오퍼월의 거의 모든 디자인을 변경할 수 있어 문의하기, 스타일 변경, 닫기 버튼의 위치나 이미지의 변경이 가능합니다.
+
+##### 구현 방법
+
+- 커스텀 레이아웃 Xml 생성
+- 커스텀 레이아웃과 각 뷰의 ID를 TnkLayout에 연결
+- TnkLayout 사용하여 AdListView 생성
+
+##### 적용 예시
+
+###### custom_offerwall_layout.xml 생성
+
+```xml
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#000000">
+
+        <Button
+            android:id="@+id/btn_style"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/icon_feed"/>
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/btn_style"
+            android:layout_toLeftOf="@+id/btn_close"
+            android:layout_centerVertical="true"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            tools:text="Test Title" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_close"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_ad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_title"
+        android:layout_above="@+id/btn_help"
+        android:divider="#EEEEEE"
+        android:dividerHeight="3dp"
+        android:background="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/btn_help"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:text="Help"/>
+</RelativeLayout>
+```
+
+###### activity_layout_custom.xml
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 오퍼월을 삽입할 컨테이너 -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_text"
+        android:layout_above="@id/bottom_buttons" />
+</LinearLayout>
+```
+
+###### LayoutCustomActivity
+
+```java
+public class LayoutCustomActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_layout_custom);
+
+        // 기본 스타일 TnkLayout 가져오기 (베이스 디자인)
+        TnkLayout customLayout = TemplateLayoutUtils.getBlueStyle_01();
+
+        /*
+         * 레이아웃 커스텀을 위해 custom_offerwall_layout.xml을 생성 후 각 뷰의 id를 TnkLayout에 연결해줍니다.
+         */
+        // 레이아웃 xml 지정 (필수)
+        customLayout.adwall.layout = R.layout.custom_offerwall_layout;
+        // 리스트 뷰 id 연결 (필수)
+        customLayout.adwall.idList = R.id.list_ad;
+        // 타이틀 텍스트뷰 id 연결
+        customLayout.adwall.idTitle = R.id.txt_title;
+        // 닫기 버튼 뷰 id 연결
+        customLayout.adwall.idClose = R.id.btn_close;
+        // 문의하기 버튼 뷰 id 연결
+        customLayout.adwall.idHelpdesk = R.id.btn_help;
+        // 스타일 변경 버튼 뷰 id 연결
+        customLayout.adwall.idListStyle = R.id.btn_style;
+        // 스타일 변경 버튼 이미지 지정 - 아이콘형
+        customLayout.adwall.bgListStyleIcon = R.drawable.icon_list;
+        // 스타일 변경 버튼 이미지 지정 - 피드형
+        customLayout.adwall.bgListStyleFeed = R.drawable.icon_feed;
+        // 리스트 아이템 간격 지정 - 아이콘형 스타일
+        customLayout.adwall.listDividerHeightIcon = 3;
+        // 리스트 아이템 간격 지정 - 피드형 스타일
+        customLayout.adwall.listDividerHeightFeed = 20;
+
+        // AdListView 생성 - 위에서 만든 customLayout 사용
+        AdListView offerwallView = TnkSession.createAdListView(this, customLayout);
+
+        // AdListView 삽입
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        addContentView(offerwallView, layoutParams);
+
+        // 리스트 로드
+        offerwallView.loadAdList();
+
+        // 닫기 버튼
+        Button btn_close = offerwallView.getCloseButton();
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+}
+```
 
 ### 마. Callback URL
 
