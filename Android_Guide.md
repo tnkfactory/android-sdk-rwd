@@ -1986,7 +1986,7 @@ SDK가 요구하는 permission들을 추가합니다.
 | ------------- | ------------ |
 | context       | Context 객체 |
 
-##### 적용 예시
+##### 적용예시
 
 ```java
 TnkSession.applicationStarted()
