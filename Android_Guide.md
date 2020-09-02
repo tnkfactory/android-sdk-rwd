@@ -1655,13 +1655,13 @@ TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
 
 TnkLayout을 사용하면 통합오퍼월의 거의 모든 디자인을 변경할 수 있어 문의하기, 스타일 변경, 닫기 버튼의 위치나 이미지의 변경이 가능합니다.
 
-##### 구현 방법
+##### 구현방법
 
 - 커스텀 레이아웃 Xml 생성
 - 커스텀 레이아웃과 각 뷰의 ID를 TnkLayout에 연결
 - TnkLayout 사용하여 AdListView 생성
 
-##### 적용 예시
+##### 적용예시
 
 ###### custom_offerwall_layout.xml 생성
 
@@ -1986,7 +1986,7 @@ SDK가 요구하는 permission들을 추가합니다.
 | ------------- | ------------ |
 | context       | Context 객체 |
 
-##### 적용예시
+##### 적용 예시
 
 ```java
 TnkSession.applicationStarted()
