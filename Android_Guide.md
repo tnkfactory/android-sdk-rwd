@@ -1728,9 +1728,11 @@ TnkLayout을 사용하면 통합오퍼월의 거의 모든 디자인을 변경�
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:text="Help"/>
+        android:text="포인트 지급 관련 문의하기"/>
 </RelativeLayout>
 ```
+
+![custom_layout_01](./img/custom_layout_01.png)
 
 ###### activity_layout_custom.xml
 
