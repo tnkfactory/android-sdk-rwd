@@ -25,5 +25,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // Tnk RWD SDK
-    implementation 'com.tnkfactory.ad:rwd:7.05.1'
+    implementation 'com.tnkfactory.ad:rwd:7.08.1'
 }
