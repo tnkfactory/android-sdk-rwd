@@ -49,6 +49,7 @@
    * [TnkSession.queryPublishState()](#tnksessionquerypublishstate)
    * [TnkSession.queryAdvertiseCount()](#tnksessionqueryadvertisecount)
    * [TnkSession.enableLogging()](#tnksessionenablelogging)
+   * [TnkSession.setAgreePrivacy()](#tnksessionsetagreeprivacy)
 
    라. [디자인 변경하기](#라-디자인-변경하기)
 
@@ -93,7 +94,7 @@
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:rwd:7.08.1'
+    implementation 'com.tnkfactory.ad:rwd:7.09.1'
 }
 ```
 
@@ -814,6 +815,14 @@ Tnk의 SDK에서 생성하는 로그를 출력할지 여부를 결정합니다. 
 ##### Method 
 
   - void TnkSession.enableLogging(boolean trueOrFalse)
+
+#### TnkSession.setAgreePrivacy()
+
+개인정보 수집동의 여부를 설정합니다. true 설정시 오퍼월에서 개인정보 수집동의 팝업이 뜨지 않습니다. 다시 해당 팝업창을 띄우고 싶은 경우 false로 설정해주시기 바랍니다.
+
+###### Method 
+
+  - void TnkSession.queryPoint(Context context, boolean isAgree)
 
 ### 라. 디자인 변경하기
 

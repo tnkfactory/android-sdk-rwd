@@ -90,7 +90,7 @@
 
 Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
-**[[Unity Plugin 다운받기](http://cdn1.tnkfactory.com/sdk/tnkad-rwd.unitypackage)]**
+**[[Unity Plugin Download v7.08.1](./sdk/tnkad-rwd.unitypackage)]**
 
 ### Plugin Import
 

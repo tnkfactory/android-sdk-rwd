@@ -13,6 +13,9 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [안드로이드 가이드 문서](./Android_Guide.md)
 
 ### Update Notice
+* 2020.12.17
+  * Android SDK v7.09.1 업데이트
+    * 개인정보 수집동의 여부 설정 기능 추가
 * 2020.11.30
   * Android SDK v7.08.1 업데이트
     * 오퍼월 필터 기능 추가
