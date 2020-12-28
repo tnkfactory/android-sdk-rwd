@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/com_tnk_offerwall_layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/com_tnk_offerwall_list_header_blue">
+
+        <Button
+            android:id="@+id/com_tnk_offerwall_layout_help"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/com_tnk_icon_help"/>
+
+        <TextView
+            android:id="@+id/com_tnk_offerwall_layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/com_tnk_offerwall_layout_help"
+            android:layout_toLeftOf="@+id/com_tnk_offerwall_layout_style"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/color_white"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            tools:text="Test Title Test TitleTest Title Test Title" />
+
+        <Button
+            android:id="@+id/com_tnk_offerwall_layout_style"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/com_tnk_icon_feed"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/com_tnk_offerwall_layout_adlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#EEEEEE"
+        android:dividerHeight="3dp"
+        android:background="@color/com_tnk_offerwall_list_bg_color"/>
+</LinearLayout>

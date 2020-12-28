@@ -11,17 +11,22 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tnkfactory.ad.AgreePrivacyPopupListener;
 import com.tnkfactory.ad.Logger;
 import com.tnkfactory.ad.ServiceCallback;
 import com.tnkfactory.ad.TnkSession;
 import com.tnkfactory.ad.TnkStyle;
+import com.tnkfactory.rwd.offerer.viewpager.ViewPagerActivity;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Boolean isAgreePrivacy = false;   // 개인정보 수집동의 여부
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         itemList.add(MainListItem.TEMPLATE);
 
         itemList.add(MainListItem.HEADER_02);
+        itemList.add(MainListItem.ViewPager);
+
+        itemList.add(MainListItem.HEADER_03);
         itemList.add(MainListItem.INTERSTITIAL_AD);
 
 
@@ -103,6 +111,31 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case TEMPLATE:
                         intent = new Intent(MainActivity.this, OfferwallTemplateActivity.class);
+                        break;
+
+                    case ViewPager:
+                        // 최초 1회는 TnkSession.showAgreePrivacyPopup()를 사용하여 개인정보 수집동의를 받고
+                        // 오퍼월을 사용해야 오퍼월 진입시 개인정보 수집동의 팝업이 뜨지 않습니다.
+                        // 이 과경을 생략할 경우 뷰페이저로 오퍼월 2개 사용시 개인정보 수집동의 팝업이 2번 노출됩니다.
+                        if (isAgreePrivacy) {
+                            intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                        } else {
+                            TnkSession.showAgreePrivacyPopup(MainActivity.this, new AgreePrivacyPopupListener() {
+                                @Override
+                                public void onConfirm() {
+                                    Toast.makeText(MainActivity.this, "개인정보 수집 동의", Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                                    startActivity(intent);
+                                    isAgreePrivacy = true;
+                                }
+
+                                @Override
+                                public void onCancle() {
+                                    Toast.makeText(MainActivity.this, "개인정보 수집 미동의", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                         break;
 
                     case INTERSTITIAL_AD:

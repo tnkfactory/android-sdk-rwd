@@ -23,6 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".viewpager.ViewPagerActivity" />
+
         <activity android:name="com.tnkfactory.ad.AdWallActivity" />
         <activity
             android:name="com.tnkfactory.ad.AdMediaActivity"

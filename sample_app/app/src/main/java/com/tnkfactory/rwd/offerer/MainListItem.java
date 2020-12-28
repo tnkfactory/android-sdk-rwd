@@ -8,7 +8,10 @@ public enum MainListItem {
     EMBED_BASIC("Embed Basic"),
     TEMPLATE("Offerwall Template"),
 
-    HEADER_02("Interstitial AD", true),
+    HEADER_02("Offerwall Sample", true),
+    ViewPager("ViewPager Sample"),
+
+    HEADER_03("Interstitial AD", true),
     INTERSTITIAL_AD("PPI Interstital Ad")
     ;
 
