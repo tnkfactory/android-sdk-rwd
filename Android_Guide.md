@@ -156,7 +156,7 @@ Proguard를 사용하실 경우 Proguard 설정내에 아래 내용을 반드시
 COPPA는 [미국 어린이 온라인 개인정보 보호법](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children's-privacy) 및 관련 법규입니다. 구글 에서는 앱이 13세 미만의 아동을 대상으로 서비스한다면 관련 법률을 준수하도록 하고 있습니다. 연령에 맞는 광고가 보일 수 있도록 아래의 옵션을 설정하시기 바랍니다.
 
 ```java
-TnkSession.setCOPPA(MainActivity.this, true); // ON - 13세 미안 아동을 대상으로 한 서비스 일경우 사용
+TnkSession.setCOPPA(MainActivity.this, true); // ON - 13세 미만 아동을 대상으로 한 서비스 일경우 사용
 TnkSession.setCOPPA(MainActivity.this, false); // OFF
 ```
 
