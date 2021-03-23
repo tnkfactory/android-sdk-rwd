@@ -94,7 +94,7 @@
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:rwd:7.11.1'
+    implementation 'com.tnkfactory.ad:rwd:7.12.1'
 }
 ```
 
