@@ -13,6 +13,13 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [안드로이드 가이드 문서](./Android_Guide.md)
 
 ### Update Notice
+* 2021.04.15
+  * Android SDK v7.18.1 업데이트
+    * 멀티탭 오퍼월 기능 추가
+    * CPS(구매형) 오퍼월 필터형 헤더 기능 추가
+    * 보상형 동영상 상품 추가
+    * 배포 저장소 Maven Central 로 이전
+    * 내부 기능 개선
 * 2021.03.29
   * Android SDK v7.15.1 업데이트
     * 내부 기능 개선
@@ -49,8 +56,9 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [유니티 플러그인 가이드 문서](./Unity_Plugin_Guide.md)
 
 ### Update Notice
-
-* 2020.01.26
+* 2021.04.15
+  * Android SDK v7.18.1 적용
+* 2021.01.26
   * Android SDK v7.11.1 적용
 * 2020.06.26
   * Android SDK v7.05.1 적용

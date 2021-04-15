@@ -28,6 +28,11 @@
      * [Description](#description-1)
      * [Parameters](#parameters-2)
      * [적용 예시](#적용-예시-1)
+   * [멀티탭 광고 목록 띄우기 (전체화면)](#멀티탭-광고-목록-띄우기-전체화면)
+     * [Method](#method-3)
+     * [Description](#description-2)
+     * [Parameters](#parameters-3)
+     * [적용 예시](#적용-예시-2)
 
    나. [EventHandler](#나-eventhandler)
 
@@ -38,37 +43,37 @@
    다. [포인트 조회 및 인출](#다-포인트-조회-및-인출)
 
    * [TnkAd.Plugin - queryPoint()](#tnkadplugin---querypoint)
-     * [Method](#method-3)
-     * [Description](#description-2)
-     * [Parameters](#parameters-3)
-   * [TnkAd.Plugin - purchaseItem()](#tnkadplugin---purchaseitem)
      * [Method](#method-4)
      * [Description](#description-3)
      * [Parameters](#parameters-4)
-   * [TnkAd.Plugin - withdrawPoints()](#tnkadplugin---withdrawpoints)
+   * [TnkAd.Plugin - purchaseItem()](#tnkadplugin---purchaseitem)
      * [Method](#method-5)
      * [Description](#description-4)
      * [Parameters](#parameters-5)
+   * [TnkAd.Plugin - withdrawPoints()](#tnkadplugin---withdrawpoints)
+     * [Method](#method-6)
+     * [Description](#description-5)
+     * [Parameters](#parameters-6)
      * [포인트 조회 및 인출 기능 적용예시](#포인트-조회-및-인출-기능-적용예시)
 
    라. [그밖의 기능들](#라-그밖의-기능들)
 
    * [TnkAd.Plugin - queryPublishState()](#tnkadplugin---querypublishstate)
-     * [Method](#method-6)
-     * [Parameters](#parameters-6)
-     * [적용 예시](#적용-예시-2)
-   
+     * [Method](#method-7)
+     * [Parameters](#parameters-7)
+     * [적용 예시](#적용-예시-3)
+
 3. [Interstitial Ad](#3-interstitial-ad)
    * [Incentive Interstitial Ad](#incentive-interstitial-ad)
    * [Interstitial Ad APIs](#interstitial-ad-apis)
      * [TnkAd.Plugin - prepareInterstitialAdForPPI()](#tnkadplugin---prepareinterstitialadforppi)
-       * [Method](#method-7)
-       * [Description](#description-5)
-       * [Parameters](#parameters-7)
-     * [TnkAd.Plugin - showInterstitialAdForPPI()](#tnkadplugin---showinterstitialadforppi)
        * [Method](#method-8)
        * [Description](#description-6)
        * [Parameters](#parameters-8)
+     * [TnkAd.Plugin - showInterstitialAdForPPI()](#tnkadplugin---showinterstitialadforppi)
+       * [Method](#method-9)
+       * [Description](#description-7)
+       * [Parameters](#parameters-9)
      * [EventHandler 이용하기](#eventhandler-이용하기)
      * [Sample](#sample)
 
@@ -90,7 +95,7 @@
 
 Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
-**[[Unity Plugin Download v7.11.1](./sdk/tnkad-rwd.unitypackage)]**
+**[[Unity Plugin Download v7.18.1](./sdk/tnkad-rwd.unitypackage)]**
 
 ### Plugin Import
 
@@ -385,6 +390,59 @@ public class TnkUITest : MonoBehaviour {
       //TnkAd.Plugin.Instance.popupAdList(title, TnkAd.AdListType.CPS, "testhandler");
       //TnkAd.Plugin.Instance.popupAdList(title, TnkAd.AdListType.CPS, TnkAd.TemplateStyle.RED_01);
       TnkAd.Plugin.Instance.popupAdList(title, TnkAd.AdListType.CPS, "testhandler", TnkAd.TemplateStyle.RED_01);
+    }
+  }
+}
+```
+
+#### 멀티탭 광고 목록 띄우기 (전체화면)
+
+보상형 광고 목록을 띄우기 위하여 TnkAd.Plugin 객체의 showAdList() 함수를 사용합니다.
+
+##### Method
+
+- void showAdListTab()
+- void showAdListTab(string title)
+- void showAdListTab(TnkAd.TemplateStyle style)
+- void showAdListTab(string title, TnkAd.TemplateStyle style)
+
+##### Description
+
+TnkAd.Plugin 클래스가 제공하는 메소드로서 멀티탭 광고 목록 화면을 띄워줍니다. TnkAd.Plugin 의 Instance 객체를 받아서 메소드를 호출해야합니다.
+
+##### Parameters
+
+| 파라메터 명칭 | 내용                          |
+| ------------- | ----------------------------- |
+| title         | 광고 리스트의 타이틀을 지정함 |
+
+##### 적용 예시
+
+```c#
+using UnityEngine;
+using System.Collections;
+
+public class TnkUITest : MonoBehaviour {
+
+  void Start ()
+  {
+  }
+  
+  void Update ()
+  {
+  }
+  
+  void OnGUI ()
+  {
+    if (GUI.Button(new Rect(100, 300, 150, 80), "Show Tab Offerwall")) {
+      Debug.Log("Tab Offerwall Ad");
+        
+      string title = "Test Title";
+
+      //TnkAd.Plugin.Instance.showAdListTab();
+      //TnkAd.Plugin.Instance.showAdListTab(title);
+      //TnkAd.Plugin.Instance.showAdListTab(TnkAd.TemplateStyle.BLUE_TAB_01);
+      TnkAd.Plugin.Instance.showAdListTab(title, TnkAd.TemplateStyle.BLUE_TAB_01);TnkAd.TemplateStyle.RED_01);
     }
   }
 }

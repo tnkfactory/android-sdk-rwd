@@ -7,6 +7,7 @@ public enum MainListItem {
     POPUP_BASIC("Popup Basic"),
     EMBED_BASIC("Embed Basic"),
     TEMPLATE("Offerwall Template"),
+    TEMPLATE_TAB("Tab Offerwall Template"),
 
     HEADER_02("Offerwall Sample", true),
     ViewPager("ViewPager Sample"),

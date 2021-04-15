@@ -52,8 +52,7 @@ public class PpiFragment extends Fragment {
 
         // AdListView 생성
         int adListViewId = 102; // 하나의 액티비티에서 오퍼월을 2개 이상 사용할 경우 각 오퍼월마다 중복되지 않도록 뷰 ID를 지정해주어야 합니다. (필수)
-        AdListView offerwallView = TnkSession.createAdListView(getActivity(), customLayout, false, null, adListViewId);
-        offerwallView.setAdListType(AdListType.PPI);
+        AdListView offerwallView = TnkSession.createAdListView(getActivity(), customLayout, false, null, AdListType.PPI, adListViewId);
         offerwallView.setTitle("your title here.");
 
         ((ViewGroup) rootView).addView(offerwallView);

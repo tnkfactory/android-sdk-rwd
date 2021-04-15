@@ -9,7 +9,7 @@
         android:id="@+id/com_tnk_offerwall_layout_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/com_tnk_offerwall_list_header_blue">
+        android:background="@color/com_tnk_offerwall_list_main_blue">
 
         <Button
             android:id="@+id/com_tnk_offerwall_layout_help"

@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         itemList.add(MainListItem.POPUP_BASIC);
         itemList.add(MainListItem.EMBED_BASIC);
         itemList.add(MainListItem.TEMPLATE);
+        itemList.add(MainListItem.TEMPLATE_TAB);
 
         itemList.add(MainListItem.HEADER_02);
         itemList.add(MainListItem.ViewPager);
@@ -112,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
                     case TEMPLATE:
                         intent = new Intent(MainActivity.this, OfferwallTemplateActivity.class);
                         break;
+                    case TEMPLATE_TAB:
+                        intent = new Intent(MainActivity.this, TabOfferwallTemplateActivity.class);
+                        break;
+
 
                     case ViewPager:
                         // 최초 1회는 TnkSession.showAgreePrivacyPopup()를 사용하여 개인정보 수집동의를 받고

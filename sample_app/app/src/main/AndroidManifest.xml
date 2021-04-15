@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".viewpager.ViewPagerActivity" />
+        <activity android:name=".TabOfferwallTemplateActivity" />
+        <activity
+            android:name=".TabOfferwallEmbedActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
 
         <activity android:name="com.tnkfactory.ad.AdWallActivity" />
         <activity

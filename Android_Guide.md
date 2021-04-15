@@ -29,11 +29,20 @@
      * [Description](#description-1)
      * [Parameters](#parameters-2)
      * [적용예시](#적용예시-1)
-   * [AdListView](#adlistview)
+   * [멀티탭 광고 목록 띄우기 (Activity)](#멀티탭-광고-목록-띄우기-activity)
      * [Method](#method-3)
+     * [Description](#description-2)
      * [Parameters](#parameters-3)
+     * [적용예시](#적용예시-2)
+   * [AdListView](#adlistview)
+     * [Method](#method-4)
+     * [Parameters](#parameters-4)
      * [Popup Sample](#popup-sample)
      * [Embed Sample](#embed-sample)
+   * [AdListTabView](#adlisttabview)
+     * [Method](#method-5)
+     * [Parameters](#parameters-5)
+     * [Embed Sample](#embed-sample-1)
    * [Listener 이용하기](#listener-이용하기)
 
    나. [포인트 조회 및 인출](#나-포인트-조회-및-인출)
@@ -66,7 +75,7 @@
    마. [Callback URL](#마-callback-url)
 
    * [호출방식](#호출방식)
-   * [Parameters](#parameters-13)
+   * [Parameters](#parameters-15)
    * [리턴값처리](#리턴값-처리)
    * [Callback URL 구현 예시 (Java)](#callback-url-구현-예시-java)
 
@@ -88,13 +97,21 @@
 
 ### 라이브러리 등록
 
-아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
+TNK SDK는 Maven Central에 배포되어 있습니다.
 
-[![Download](https://api.bintray.com/packages/tnkfactory/android-sdk/rwd/images/download.svg)](https://bintray.com/tnkfactory/android-sdk/rwd/_latestVersion)
+최상위 Level(Project) 의 build.gradle 에 maven repository를 추가해주세요. 
+
+```gradle
+repositories {
+    mavenCentral()
+}
+```
+
+아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory.ad:rwd:7.15.1'
+    implementation 'com.tnkfactory:rwd:7.18.1"
 }
 ```
 
@@ -228,7 +245,7 @@ Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 �
 | ------------- | ------------------------------------------------------------ |
 | activity      | 현재 Activity 객체                                           |
 | title         | 광고 리스트의 타이틀을 지정함  (기본값 : 무료 포인트 받기)   |
-|adListType | 광고 리스트의 타입 (DEFAULT : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형)   |
+|adListType | 광고 리스트의 타입 (ALL : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형) |
 | userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
 ##### 적용예시
@@ -283,7 +300,7 @@ public void onCreate(Bundle savedInstanceState) {
 | ------------- | ------------------------------------------------------------ |
 | activity      | 현재 Activity 객체                                           |
 | title         | 광고 리스트의 타이틀을 지정함  (기본값 : 무료 포인트 받기)   |
-|adListType | 광고 리스트의 타입 (DEFAULT : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형)   |
+|adListType | 광고 리스트의 타입 (ALL : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형) |
 | listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#listener-이용하기)] 내용을 참고해주세요. |
 | userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
 
@@ -312,6 +329,61 @@ public void onCreate(Bundle savedInstanceState) {
 }
 ```
 
+#### 멀티탭 광고 목록 띄우기 (Activity)
+
+자신의 앱에서 탭이 여러개인 광고 목록을 띄우기 위하여 TnkSession.showAdListByType() 함수를 사용합니다. 멀티탭 광고목록을 보여주기 위하여 새로운 Activity를 띄웁니다.
+
+##### Method
+
+- void TnkSession.showAdListByType(Activity activity)
+- void TnkSession.showAdListByType(Activity activity, String title, AdListType... adListType)
+- void TnkSession.showAdListByType(Activity activity, String title, TnkLayout userLayout, AdListType... adListType)
+- void TnkSession.showAdListByType(Activity activity, TnkLayout userLayout, AdListType... adListType)
+
+##### Description
+
+멀티탭 광고 목록 화면 (AdWallActivity)를 화면에 띄웁니다. 
+
+반드시 Main UI Thread 상에서 호출하여야 합니다.
+
+##### Parameters
+
+| 파라메터 명칭 | 내용                                                         |
+| ------------- | ------------------------------------------------------------ |
+| activity      | 현재 Activity 객체                                           |
+| title         | 광고 리스트의 타이틀을 지정함  (기본값 : 무료 포인트 받기)   |
+|adListType | 광고 리스트의 타입 (ALL : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형) |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
+
+##### 적용예시
+
+```java
+@Override
+
+public void onCreate(Bundle savedInstanceState) {
+
+    ...
+
+    final Button button = (Button)findViewById(R.id.main_ad);
+
+    button.setOnClickListener(new OnClickListener() {
+
+        @Override
+
+        public void onClick(View v) {
+            // AdListType은 가변인자로 사용하기 원하는 타입을 n개 넣어주시면 n개만큼 탭이 생성됩니다.
+            TnkSession.showAdListByType(MainActivity.this,
+                                  "Your title here",
+                                  AdListType.ALL,
+                                  AdListType.PPI,
+                                  AdListType,CPS      
+                                 );
+        }
+
+    });
+}
+```
+
 #### AdListView
 
 AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개발자는 createAdListView() 메소드를 사용하여 AdListView 객체를 생성할 수 있습니다.
@@ -320,17 +392,21 @@ AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개�
 
 ##### Method
 
+- AdListView TnkSession.createAdListView(Activity activity)
+- AdListView TnkSession.createAdListView(Activity activity, AdListType adListType)
+- AdListView TnkSession.createAdListView(Activity activity, AdListType adListType, TnkAdListener listener)
 - AdListView TnkSession.createAdListView(Activity activity, boolean popupStyle)
-- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout)
 - AdListView TnkSession.createAdListView(Activity activity, boolean popupStyle, TnkAdListener listener)
+- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout)
 - AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout, TnkAdListener listener)
-- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout, boolean popupStyle, TnkAdListener listener)
+- AdListView TnkSession.createAdListView(Activity activity, TnkLayout userLayout, boolean popupStyle, , AdListType adListType, TnkAdListener listener)
 
 ##### Parameters
 
 | 파라메터 명칭 | 내용                                                         |
 | ------------- | ------------------------------------------------------------ |
 | activity      | 현재 Activity 객체                                           |
+| adListType      |  광고 리스트의 타입을 설정합니다. (ALL : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형)  |
 | popupStyle    | 생성되는 AdListView 화면을 팝업 화면 형태(true) 또는 전체 화면 형태(false)로 지정합니다. |
 | listnener     | TnkAdListener 객체. 자세한 내용은 아래 [[Listener 이용하기](#listener-이용하기)] 내용을 참고해주세요. |
 | userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
@@ -353,11 +429,6 @@ AdListView는 보상형 광고목록을 제공하는 View 객체입니다. 개�
 ###### void setTitle(String title)
 
 - 광고목록 상단 타이틀을 설정합니다.
-
-###### void setAdListType(AdListType adListType)
-
-- 광고 리스트의 타입을 설정합니다. (DEFAULT : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형)
-
 
 ###### void setListener(TnkAdListener listener)
 
@@ -420,7 +491,7 @@ adlistView.show(MainActivity.this);
 ##### Embed Sample
 
 ```java
-AdListView adlistView = TnkSession.createAdListView(MainActivity.this, true);
+AdListView adlistView = TnkSession.createAdListView(this, true);
 adlistView.setTitle("Get Free Coins!!");
 
 ViewGroup viewGroup = (ViewGroup)findViewById(R.id.adlist);
@@ -429,6 +500,44 @@ viewGroup.addView(adlistView);
 adlistView.loadAdList();
 ```
 
+#### AdListTabView
+
+AdListTabView 보상형 탭형 광고목록을 제공하는 View 객체입니다. 개발자는 createAdListTabView() 메소드를 사용하여 AdListTabView 객체를 생성할 수 있습니다.
+
+생성된 AdListTabView 객체를 현재 Activity에 팝업형태로 띄우거나 자신의 구성한 화면의 하위 View로 추가(addView) 할 수 있습니다.
+
+##### Method
+
+- AdListTabView TnkSession.createAdListTabView(Activity activity, AdListType... adListType)
+- AdListTabView TnkSession.createAdListTabView(Activity activity, String title, AdListType... adListType)
+- AdListTabView TnkSession.createAdListTabView(Activity activity, String title, TnkLayout userLayout, AdListType... adListType)
+- AdListTabView TnkSession.createAdListTabView(Activity activity, TnkLayout userLayout, AdListType... adListType)
+
+##### Parameters
+
+| 파라메터 명칭 | 내용                                                         |
+| ------------- | ------------------------------------------------------------ |
+| activity      | 현재 Activity 객체                                           |
+| adListType      |  광고 리스트의 타입을 설정합니다. (ALL : 보상형과 구매형 모두 표시, PPI : 보상형, CPS : 구매형)  |
+| userLayout    | 원하는 Layout을 지정할 수 있습니다. 자세한 내용은  [[디자인 변경하기](#라-디자인-변경하기)] 내용을 참고해주세요. |
+
+아래의 메소드들은 AdListTabView에서 제공하는 기능들입니다.
+
+###### void setListener(TnkAdListener listener)
+
+- AdListTabView 팝업 화면이 나타날때와 사라질때의 event를 받기 위하여 TnkAdListener 객체를 설정합니다.
+
+- 자세한 내용은 하단의 TnkAdListener 내용을 참고해주세요.
+
+##### Embed Sample
+
+```java
+// AdListType은 가변인자로 사용하기 원하는 타입을 n개 넣어주시면 n개만큼 탭이 생성됩니다.
+AdListTabView adListTabView = TnkSession.createAdListTabView(this, "Get Free Coins!!", layout, AdListType.ALL, AdListType.PPI, AdListType.CPS);
+
+ViewGroup viewGroup = (ViewGroup)findViewById(R.id.adlist);
+viewGroup.addView(adlistView);
+```
 #### Listener 이용하기
 
 AdListView를 팝업화면으로 화면에 띄울 경우 화면이 나타나는 시점과 화면이 닫히는 시점을 알고 싶을 때 아래의 TnkAdListener 인터페이스를 사용합니다.
@@ -721,11 +830,11 @@ Tnk서버에서 사용자가 참여 가능한 모든 광고의 적립 가능한 
 
 ###### Method 
 
-  - int TnkSession.getEarnPoints(Context context)
+  - long TnkSession.getEarnPoints(Context context)
 
 ###### Description
 
-Tnk서버에서 사용자가 참여 가능한 모든 광고의 적립 가능한 총 포인트 값을 조회하여 그 결과를 int 값으로 반환합니다. 
+Tnk서버에서 사용자가 참여 가능한 모든 광고의 적립 가능한 총 포인트 값을 조회하여 그 결과를 long 값으로 반환합니다. 
 
 ###### Parameters
 
@@ -743,7 +852,7 @@ static public void getEarnPoint() {
     new Thread() {
 
         public void run() {
-            int points = TnkSession.getEarnPoints(mActivity);
+            long points = TnkSession.getEarnPoints(mActivity);
             showPoint(points); // 결과를 받아서 필요한 로직을 수행한다.
         }
     }.start();
