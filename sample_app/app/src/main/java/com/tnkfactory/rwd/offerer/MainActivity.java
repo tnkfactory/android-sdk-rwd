@@ -20,6 +20,7 @@ import com.tnkfactory.ad.Logger;
 import com.tnkfactory.ad.ServiceCallback;
 import com.tnkfactory.ad.TnkSession;
 import com.tnkfactory.ad.TnkStyle;
+import com.tnkfactory.rwd.offerer.utils.GAIDTask;
 import com.tnkfactory.rwd.offerer.viewpager.ViewPagerActivity;
 
 import java.util.ArrayList;
@@ -36,7 +37,14 @@ public class MainActivity extends AppCompatActivity {
         Logger.enableLogging(true);
 
         // 유저 식별 값 설정
-        TnkSession.setUserName(MainActivity.this, "Test_User");
+        new GAIDTask(this, true, new GAIDTask.GAIDListener() {
+            @Override
+            public void onSuccess(String gaid) {
+                if (gaid != null) {
+                    TnkSession.setUserName(MainActivity.this, gaid);
+                }
+            }
+        }).execute();
 
         // 실행형 광고
         TnkSession.applicationStarted(this);
