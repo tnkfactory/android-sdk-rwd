@@ -1039,7 +1039,8 @@ TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모�
 | adwall.detail.idAppDescSeparator | 참여시 주의 사항과 설명문 사이의 구분선 View 의 ID           |
 | adwall.detail.idImage            | 광고 이미지 ImageView 의 ID                                  |
 | adwall.detail.idCampnType        | 광고 종류 TextView의 ID                                      |
-| adwall.detail.confirmText        | 이동 버튼 Default Text                                       |
+| adwall.detail.confirmTextCPI     | 이동 버튼 Default Text                                       |
+| adwall.detail.confirmTextCPS     | 이동 버튼 Default Text (구매형)                                      |
 | adwall.detail.campn              | 광고 종료 TextView의 배경 이미지와 색상을 정의 (아래 별도 설명) |
 | adwall.detail.tag                | 광고 적립금 표시용 Tag의 배경 이미지와 색상을 정의 (아래 별도 설명) |
 
@@ -1657,8 +1658,8 @@ public class OfferwallTemplateActivity extends AppCompatActivity {
         res.adwall.detail.actionItem.idAction = com.tnkfactory.ad.R.id.com_tnk_offerwall_detail_aciton_item_desc;
         res.adwall.detail.actionItem.idTagPoint = com.tnkfactory.ad.R.id.com_tnk_offerwall_detail_aciton_item_point;
         res.adwall.detail.actionItem.idTagUnit = com.tnkfactory.ad.R.id.com_tnk_offerwall_detail_aciton_item_unit;
-        res.adwall.detail.confirmText = "코인받기";
-
+        res.adwall.detail.confirmTextCPI = "{unit}받기";
+        res.adwall.detail.confirmTextCPS = "구매하고 {unit}받기";
         return res;
     }
   
