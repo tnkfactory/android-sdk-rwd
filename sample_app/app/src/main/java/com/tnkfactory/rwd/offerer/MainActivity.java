@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Logger.enableLogging(true);
 
         // 유저 식별 값 설정
+        // 샘플에서는 GAID를 사용해 유저 식별 값을 설정했으나 GAID는 초기화가 가능한 값이므로
+        // 사용자가 변경 불가능한 값을 사용해 설정하는 것을 추천합니다.
+        // ex) 로그인ID, 이메일 등
         new GAIDTask(this, true, new GAIDTask.GAIDListener() {
             @Override
             public void onSuccess(String gaid) {
