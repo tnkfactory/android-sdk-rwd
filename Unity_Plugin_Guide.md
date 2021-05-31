@@ -95,7 +95,7 @@
 
 Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
-**[[Unity Plugin Download v7.18.1](./sdk/tnkad-rwd.unitypackage)]**
+**[[Unity Plugin Download v7.21.1](./sdk/tnkad-rwd.unitypackage)]**
 
 ### Plugin Import
 
@@ -124,8 +124,6 @@ Plugin 내에는 TnkAdAndroidMenifest.xml 파일이 포함되어 있습니다. �
   android:versionName="1.0" 
   android:versionCode="1" 
   android:installLocation="preferExternal">
-
-  <uses-sdk android:minSdkVersion="16"/>
   
   <supports-screens 
     android:smallScreens="true" 
