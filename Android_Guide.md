@@ -997,7 +997,7 @@ TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모�
 | adwall.itemIcon.idTagPoint       | 광고 적립금 표시용 TextView 의 ID                            |
 | adwall.itemIcon.idTagUnit        | 광고 적립금 단위 표시용 TextView 의 ID                       |
 | adwall.itemIcon.idCampnType      | 광고 종류 TextView의 ID                                      |
-| adwall.itemIcon.idContent        | 광고 전면 컨텐츠 표시용 ViewGroup 의 ID                      |
+| adwall.itemIcon.idImage          | 광고 전면 이미지 용 ImageView 의 ID                          |
 | adwall.itemIcon.bgItemEven       | 광고 항목 배경을 번갈이 다르게 지정하고 싶을 경우 사용.  짝수번째에 표시할 배경 이미지의 Drawable ID를 지정 |
 | adwall.itemIcon.bgItemOdd        | 광고 항목 배경을 번갈이 다르게 지정하고 싶을 경우 사용.   홀수번째에 표시할 배경 이미지의 Drawable ID를 지정 |
 | adwall.itemIcon.campn            | 광고 종료 TextView의 배경 이미지와 색상을 정의 (아래 별도 설명) |
@@ -1037,7 +1037,7 @@ TnkLayout 객체를 생성하시고 아래의 속성값을 지정합니다. 모�
 | adwall.detail.idJoinDesc         | 참여시 주의사항 TextView 의 ID                               |
 | adwall.detail.idAppDesc          | 설명문 TextView 의 ID                                        |
 | adwall.detail.idAppDescSeparator | 참여시 주의 사항과 설명문 사이의 구분선 View 의 ID           |
-| adwall.detail.idImage            | 광고 이미지 ImageView 의 ID                                  |
+| adwall.detail.idContent          | 광고 컨텐츠 ViewGroup 의 ID (이미지 or 비디오 표시)          |
 | adwall.detail.idCampnType        | 광고 종류 TextView의 ID                                      |
 | adwall.detail.confirmText        | 이동 버튼 Default Text                                       |
 | adwall.detail.confirmTextCPS     | 이동 버튼 Default Text (구매형)                              |
