@@ -111,7 +111,7 @@ repositories {
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory:rwd:7.22.1'
+    implementation 'com.tnkfactory:rwd:7.24.1'
 }
 ```
 
