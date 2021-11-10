@@ -13,6 +13,9 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [안드로이드 가이드 문서](./Android_Guide.md)
 
 ### Update Notice
+* 2021.11.09
+  * Android SDK v7.25.1 업데이트
+    * 버그 수정
 * 2021.09.30
   * Android SDK v7.24.1 업데이트
     * 고정오퍼월 기능 추가
