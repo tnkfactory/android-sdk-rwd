@@ -70,6 +70,8 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [유니티 플러그인 가이드 문서](./Unity_Plugin_Guide.md)
 
 ### Update Notice
+* 2021.11.10
+  * Android SDK v7.25.1 적용
 * 2021.05.31
   * Android SDK v7.21.1 적용
 * 2021.04.15

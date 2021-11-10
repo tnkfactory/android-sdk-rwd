@@ -5,6 +5,9 @@
 1. [Unity Settings](#1-unity-settings)
    * [Plugin Download](#plugin-download)
    * [Plugin Import](#plugin-import)
+   * [gradleTemplate.properties 설정](gradletemplateproperties-설정)
+   * [baseProjectTemplate.gradle 설정](baseProjecttemplategradle-설정)
+   * [mainTemplate.gradle 설정](maintemplategradle-설정)
    * [AdnroidMenifest.xml 설정](#adnroidmenifestxml-설정)
      * [Permission 설정](#permission-설정)
      * [Tnk App ID 설정](#tnk-app-id-설정)
@@ -105,13 +108,40 @@ Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
 모두 선택된 상태에서 [import] 버튼을 누르면 Plugin 파일들이 프로젝트로 import 됩니다.
 
+모든 파일을 import 할 필요는 없습니다. Plugins/Android 폴더내에 이미 있는 파일이 존재한다면 무조건 import를 하지마시고 아래 가이드를 통해 필요한 부분만 추가 및 변경하셔서 사용할 것을 권장합니다.
+
+### gradleTemplate.properties 설정
+
+gradleTemplate.properties 파일에 AndroidX 설정을 추가해주세요.
+
+```gradle
+android.useAndroidX=true
+android.enableJetifier=true
+```
+
+### baseProjectTemplate.gradle 설정
+
+baseProjectTemplate.gradle 파일에 maven repository를 추가해주세요.
+
+```gradle
+repositories {
+    mavenCentral()
+}
+```
+
+### mainTemplate.gradle 설정
+
+mainTemplate.gradle 파일에 TNK SDK 설정을 추가해주세요.
+
+```gradle
+dependencies {
+    implementation 'com.tnkfactory:rwd:7.25.1'
+}
+```
+
 ### AdnroidMenifest.xml 설정
 
-Plugin 내에는 TnkAdAndroidMenifest.xml 파일이 포함되어 있습니다. 이 파일의 내용을 참고하시어 AndroidMenifest.xml 파일을 직접 작성하시거나 또는 Android project로 export 하신 후 생성된 AndroidMenifest.xml 파일을 기초로 TnkAd Rwd SDK에서 필요로 하는 내용을 추가하시기 바랍니다.
-
-작성하신 AndroidMenifest.xml 파일은 Unity 프로젝트의 Plugins/Android 폴더 저장하시기 바랍니다.
-
-아래는 TnkAdAndroidMenifest.xml 파일의 내용입니다. 주석으로 되어 있는 부분의 설명을 확인하시고 본인의 AndroidMenifest.xml 파일에 반영해주세요.
+기존에 작성하신 AndroidMenifest.xml 파일에 아래 코드 중 주석으로 되어 있는 부분의 설명을 확인하시고 본인의 AndroidMenifest.xml 파일에 반영해주세요.
 
 > ##### TnkAdAndroidMenifest.xml
 
