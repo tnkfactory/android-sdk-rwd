@@ -1941,7 +1941,7 @@ public class LayoutCustomActivity extends AppCompatActivity {
 
 이후에는 사용자에게 포인트가 적립될 때 마다 실시간으로 위 URL로 적립 정보를 받을 수 있습니다.
 
-![RedStyle_08](./img/publish_point_manage.jpg)
+![RedStyle_08](./img/publish_point_manage2.jpg)
 
 ##### 호출방식
 
