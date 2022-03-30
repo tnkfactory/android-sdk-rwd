@@ -1692,6 +1692,14 @@ TemplateLayoutUtils.getRedStyle_06(); // IconItem : Tall Square / FeedItem : But
 TemplateLayoutUtils.getRedStyle_07(); // IconItem : Tall Ellipse / FeedItem : Square
 TemplateLayoutUtils.getRedStyle_08(); // IconItem : Tall Ellipse / FeedItem : Button
 
+													   
+// Custom Color
+// 1. 탭이 없는 레이아웃용
+TemplateLayoutUtils.getCustomPrimaryColor_nor("#999933");
+
+// 2. 카테고리 탭이 있는 레이아웃용
+TemplateLayoutUtils.getCustomPrimaryColor_tab("#999933");
+
 ```
 
 ##### 사용방법 예시
@@ -1705,6 +1713,17 @@ TnkSession.popupAdList(this, "Title", null, TemplateLayoutUtils.getBlueStyle_01(
 
 // AdListView
 TnkSession.createAdListView(this, TemplateLayoutUtils.getBlueStyle_01());
+													   
+
+
+// 탭이 없는 레이아웃 커스텀 컬러
+TnkLayout layoutNor = TemplateLayoutUtils.getCustomPrimaryColor_nor("#999933");
+TnkSession.showAdList(OfferwallTemplateActivity.this, "타이틀", layoutNor);
+
+// 탭이 있는 레이아웃 커스텀 컬러
+TnkLayout layoutTab = TemplateLayoutUtils.getCustomPrimaryColor_tab("#999933");
+TnkSession.showAdListByType(OfferwallTemplateActivity.this, "타이틀", layoutTab, AdListType.ALL, AdListType.PPI, AdListType.CPS);
+
 ```
 
 ##### 템플릿 디자인
