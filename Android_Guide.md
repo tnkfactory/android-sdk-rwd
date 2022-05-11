@@ -145,6 +145,12 @@ Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이�
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 ```
 
+Google 광고ID 수집을 위한 퍼미션 추가
+	
+```xml
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
+
 #### Activity tag 추가하기
 
 광고 목록을 띄우기 위한 Activity 2개를 <activity>로 아래와 같이 설정합니다. 매체앱인 경우에만 설정하시면 됩니다. 광고만 진행하실 경우에는 설정하실 필요가 없습니다.
