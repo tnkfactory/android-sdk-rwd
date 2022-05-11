@@ -382,7 +382,7 @@ public void onCreate(Bundle savedInstanceState) {
                                   "Your title here",
                                   AdListType.ALL,
                                   AdListType.PPI,
-                                  AdListType,CPS      
+                                  AdListType.CPS      
                                  );
         }
 
