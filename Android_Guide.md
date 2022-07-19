@@ -15,7 +15,9 @@
 2. [광고 목록 띄우기](#2-광고-목록-띄우기)
     
 3. [Publisher API](#3-publisher-api)
-
+ 
+   가. [광고 목록 출력](#가-광고-목록-출력)
+   
    * [TNK SDK 초기화](#tnk-sdk-초기화)
      * [Method](#method)
      * [Parameters](#parameters)
@@ -229,9 +231,11 @@ TnkSession.setCOPPA(MainActivity.this, false); // OFF
 
 ## 2. 광고 목록 띄우기
 
+
 ```diff
 - 주의 : 테스트 상태에서는 테스트하는 장비를 개발 장비로 등록하셔야 광고목록이 정상적으로 나타납니다.
 ```
+링크 : [테스트 단말기 등록방법](https://github.com/tnkfactory/android-sdk-rwd/blob/master/reg_test_device.md)
 
 다음과 같은 과정을 통해 광고 목록을 출력 하실 수 있습니다.
 
@@ -280,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
 ## 3. Publisher API
 
 게시앱(Publisher)을 위한 가이드입니다.
+
+### 가. 광고 목록 출력
 
 ### TNK SDK 초기화
 
