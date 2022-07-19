@@ -12,10 +12,13 @@
    * [Proguard 사용](#proguard-사용)
    * [COPPA 설정](#coppa-설정)
 
-2. [Publisher API](#2-publisher-api)
+2. [광고 목록 띄우기](#2-광고-목록-띄우기)
+    
+3. [Publisher API](#3-publisher-api)
 
-   가. [광고 목록 띄우기](#가-광고-목록-띄우기)
-
+   * [TNK SDK 초기화](#tnk-sdk-초기화)
+     * [Method](#method)
+     * [Parameters](#parameters)
    * [유저 식별 값 설정](#유저-식별-값-설정)
      * [Method](#method)
      * [Parameters](#parameters)
@@ -79,11 +82,9 @@
    * [리턴값처리](#리턴값-처리)
    * [Callback URL 구현 예시 (Java)](#callback-url-구현-예시-java)
 
-3. [Analytics Report](#3-analytics-report)
+4. [Analytics Report](#4-analytics-report)
 
    * [기본 설정](#기본-설정)
-   * [필수 호출](#필수-호출)
-     * [TnkSession.applicationStarted()](#tnksessionapplicationstarted)
    * [사용 활동 분석](#사용-활동-분석)
      * [TnkSession.actionCompleted()](#tnksessionactioncompleted)
    * [구매 활동 분석](#구매-활동-분석)
@@ -92,79 +93,122 @@
 
    
 
-
 ## 1. SDK 설정하기
 
 ### 라이브러리 등록
-
 TNK SDK는 Maven Central에 배포되어 있습니다.
 
-최상위 Level(Project) 의 build.gradle 에 maven repository를 추가해주세요. 
+settings.gradle에 아래와 같이 mavenCentral()가 포함되어있는지 확인합니다.
+```gradle
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "project_name"
+include ':app'
+```
 
+만약 settings.gradle에 저 부분이 존재하지 않다면 최상위 Level(Project)의 build.gradle에 maven repository를 추가해주세요.
 ```gradle
 repositories {
     mavenCentral()
 }
 ```
 
-아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
-
-```gradle
-dependencies {
-    implementation 'com.tnkfactory:rwd:7.29.1'
-}
-```
-
 ### Manifest 설정하기
+
+#### 권한 설정
+
+아래와 같이 권한 사용을 추가합니다.
+```xml
+// 인터넷
+<uses-permission android:name="android.permission.INTERNET" />
+// 동영상 광고 재생을 위한 wifi접근
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+// 광고 아이디 획득
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
 
 #### Application ID 설정하기
 
-Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이를 AndroidMenifest.xml 파일의 <application> tag 안에 아래와 같이 설정합니다. 
-
+Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이를 AndroidMenifest.xml 파일의 application tag 안에 아래와 같이 설정합니다.
 (*your-application-id-from-tnk-site* 부분을 실제 App ID 값으로 변경하세요.)
+
 
 ```xml
 <application>
-
-     ...
 
     <meta-data android:name="tnkad_app_id" android:value="your-application-id-from-tnk-site" />
 
 </application>
 ```
 
-#### 권한 설정
 
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-```
-
-동영상 광고 적용 시 **ACCESS_WIFI_STATE** 권한은 필수 설정 권한입니다.
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-```
-
-Google 광고ID 수집을 위한 퍼미션 추가
-	
-```xml
-<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
-```
 
 #### Activity tag 추가하기
 
-광고 목록을 띄우기 위한 Activity 2개를 <activity>로 아래와 같이 설정합니다. 매체앱인 경우에만 설정하시면 됩니다. 광고만 진행하실 경우에는 설정하실 필요가 없습니다.
+광고 목록을 띄우기 위한 Activity 2개를 <activity/>로 아래와 같이 설정합니다. 매체앱인 경우에만 설정하시면 됩니다. 광고만 진행하실 경우에는 설정하실 필요가 없습니다.
+
 
 ```xml
 <activity android:name="com.tnkfactory.ad.AdWallActivity" />
-<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
+<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="portrait"/>
 
 <!-- 또는 아래와 같이 설정-->
 <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="sensorLandscape"/>
-
-<!-- 동영상 세로 화면으로 설정하려면 아래와 같이 설정 -->
-<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="portrait"/
 ```
+
+AndroidManifest.xml의 내용 예시 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tnkfactory.adzzle2">
+
+    // 인터넷
+    <uses-permission android:name="android.permission.INTERNET" />
+    // 동영상 광고 재생을 위한 wifi접근
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    // 광고 아이디 획득
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    // 기타 앱에서 사용하는 권한
+    //...
+    //...
+    
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        ...
+        ...
+        <activity android:name="com.tnkfactory.ad.AdWallActivity" android:exported="true"/>
+        <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="fullSensor" android:exported="true"/>
+        ...
+        ...
+        <!-- App ID -->
+        <meta-data
+            android:name="tnkad_app_id"
+            android:value="50c050c0-e091-84ca-ac48-190e0a07080e" />
+        ...
+        ...
+    </application>
+</manifest>	
+```
+	
 
 ### Proguard 사용
 
@@ -183,27 +227,86 @@ TnkSession.setCOPPA(MainActivity.this, true); // ON - 13세 미만 아동을 대
 TnkSession.setCOPPA(MainActivity.this, false); // OFF
 ```
 
-## 2. Publisher API
+## 2. 광고 목록 띄우기
+
+```diff
+- 주의 : 테스트 상태에서는 테스트하는 장비를 개발 장비로 등록하셔야 광고목록이 정상적으로 나타납니다.
+```
+
+다음과 같은 과정을 통해 광고 목록을 출력 하실 수 있습니다.
+
+1) TNK SDK 초기화 
+
+2) 유저 식별값 설정
+
+3) COPPA 설정
+
+4) 광고 목록 출력
+
+광고 목록을 출력하는 Activity의 예제 소스
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // 유저 식별 값 설정
+        TnkSession.setUserName(MainActivity.this, "유저 식별값");
+
+        // TNK SDK 초기화(가능하면 Application class의 onCreate에서 실행 하시기 바랍니다.)
+        TnkSession.applicationStarted(this);
+
+        // COPPA 설정 (true - ON / false - OFF)
+        TnkSession.setCOPPA(MainActivity.this, false);
+
+        // 광고 출력버튼
+        Button btnShowAd = (Button) findViewById(R.id.btn_show_ad);
+
+        btnShowAd.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TnkSession.showAdListByType(MainActivity.this, "Basic", AdListType.ALL, AdListType.PPI, AdListType.CPS);
+            }
+        });
+
+    }
+}
+```
+
+## 3. Publisher API
 
 게시앱(Publisher)을 위한 가이드입니다.
 
-이를  위해서는 Tnk 사이트에서 앱 등록 및 프로젝트 상의 SDK 관련 설정이 우선 선행되어야합니다.
+### TNK SDK 초기화
 
-[[SDK 설정하기](#1-sdk-설정하기)]의 내용을 우선 확인해주세요.
+앱이 실행되는 시점에 TnkSession.applicationStarted()를 호출합니다.
 
+#### TnkSession.applicationStarted()
 
+##### Method
 
-Tnk의 SDK를 적용하여 게시앱을 구현하는 것은 크게 3단계로 이루어집니다.
+- void TnkSession.applicationStarted(Context context)
 
-1) Tnk 사이트에서 앱 등록 및 매체 정보 등록
+##### Description
 
-2) 앱 내에 Tnk 충전소로 이동하는 버튼 구현
+앱이 실행되는 시점에 호출합니다. 다른 API 보다 가장 먼저 호출되어야 합니다.
 
-3) 사용자가 충전한 포인트 조회 및 사용
+##### Parameters
 
-### 가. 광고 목록 띄우기
+| 파라메터 명칭 | 내용         |
+| ------------- | ------------ |
+| context       | Context 객체 |
 
-<u>테스트 상태에서는 테스트하는 장비를 개발 장비로 등록하셔야 광고목록이 정상적으로 나타납니다.</u>
+##### 적용 예시
+
+```java
+TnkSession.applicationStarted(context)
+```
+
 
 #### 유저 식별 값 설정
 
@@ -2044,7 +2147,7 @@ if (checkCode == null || !checkCode.equals(verifyCode)) {
 
 
 
-## 3. Analytics Report
+## 4. Analytics Report
 
 Analytics 적용을 위해서는 Tnk 사이트에서 앱 등록 및 프로젝트 상의 SDK 관련 설정이 우선 선행되어야합니다.
 
@@ -2113,32 +2216,6 @@ SDK가 요구하는 permission들을 추가합니다.
     </application>
 
 </manifest> 
-```
-
-### 필수 호출
-
-앱이 실행되는 시점에 TnkSession.applicationStarted()를 호출합니다. 필수적으로 호출해야하는 API 이며 이것만으로도 사용자 활동 분석을 제외한 대부분의 분석 데이터를 얻으실 수 있습니다.
-
-#### TnkSession.applicationStarted()
-
-##### Method
-
-- void TnkSession.applicationStarted(Context context)
-
-##### Description
-
-앱이 실행되는 시점에 호출합니다. 다른 API 보다 가장 먼저 호출되어야 합니다.
-
-##### Parameters
-
-| 파라메터 명칭 | 내용         |
-| ------------- | ------------ |
-| context       | Context 객체 |
-
-##### 적용 예시
-
-```java
-TnkSession.applicationStarted()
 ```
 
 ### 사용 활동 분석
