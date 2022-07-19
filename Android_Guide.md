@@ -237,6 +237,8 @@ TnkSession.setCOPPA(MainActivity.this, false); // OFF
 ```
 링크 : [테스트 단말기 등록방법](https://github.com/tnkfactory/android-sdk-rwd/blob/master/reg_test_device.md)
 
+궁금한 사항은 <a href="mailto:platform@tnkfactory.com">platform@tnkfactory.com</a>으로 문의하여 주시기 바랍니다.
+
 다음과 같은 과정을 통해 광고 목록을 출력 하실 수 있습니다.
 
 1) TNK SDK 초기화 
