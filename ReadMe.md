@@ -6,6 +6,9 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 * 보상형 전면광고(Interstitial Ad)
 * 분석도구(Analytics) 기능 제공으로 유입경로 별 앱사용율, 재방문율, 퍼널분석 등의 다양한 분석보고서 생성
 
+## Contact US 
+궁금한 사항은 [platform@tnkfactory.com](mailto:platform@tnkfactory.com) 문의 주시기 바랍니다.
+
 ## Android
 
 ### Android Guide
