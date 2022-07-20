@@ -127,6 +127,12 @@ repositories {
 }
 ```
 
+아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
+```gradle
+dependencies {
+    implementation 'com.tnkfactory:rwd:7.29.5'
+}
+```
 ### Manifest 설정하기
 
 #### 권한 설정
