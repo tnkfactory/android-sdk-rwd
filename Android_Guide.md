@@ -18,9 +18,6 @@
  
    가. [광고 목록 출력](#가-광고-목록-출력)
    
-   * [TNK SDK 초기화](#tnk-sdk-초기화)
-     * [Method](#method)
-     * [Parameters](#parameters)
    * [유저 식별 값 설정](#유저-식별-값-설정)
      * [Method](#method)
      * [Parameters](#parameters)
@@ -87,6 +84,9 @@
 4. [Analytics Report](#4-analytics-report)
 
    * [기본 설정](#기본-설정)
+   * [TNK SDK 초기화](#tnk-sdk-초기화)
+     * [Method](#method)
+     * [Parameters](#parameters)
    * [사용 활동 분석](#사용-활동-분석)
      * [TnkSession.actionCompleted()](#tnksessionactioncompleted)
    * [구매 활동 분석](#구매-활동-분석)
@@ -292,33 +292,6 @@ public class MainActivity extends AppCompatActivity {
 게시앱(Publisher)을 위한 가이드입니다.
 
 ### 가. 광고 목록 출력
-
-### TNK SDK 초기화
-
-앱이 실행되는 시점에 TnkSession.applicationStarted()를 호출합니다.
-
-#### TnkSession.applicationStarted()
-
-##### Method
-
-- void TnkSession.applicationStarted(Context context)
-
-##### Description
-
-앱이 실행되는 시점에 호출합니다. 다른 API 보다 가장 먼저 호출되어야 합니다.
-
-##### Parameters
-
-| 파라메터 명칭 | 내용         |
-| ------------- | ------------ |
-| context       | Context 객체 |
-
-##### 적용 예시
-
-```java
-TnkSession.applicationStarted(context)
-```
-
 
 #### 유저 식별 값 설정
 
@@ -2228,6 +2201,32 @@ SDK가 요구하는 permission들을 추가합니다.
     </application>
 
 </manifest> 
+```
+
+### TNK SDK 초기화
+
+앱이 실행되는 시점에 TnkSession.applicationStarted()를 호출합니다.
+
+#### TnkSession.applicationStarted()
+
+##### Method
+
+- void TnkSession.applicationStarted(Context context)
+
+##### Description
+
+앱이 실행되는 시점에 호출합니다. 다른 API 보다 가장 먼저 호출되어야 합니다.
+
+##### Parameters
+
+| 파라메터 명칭 | 내용         |
+| ------------- | ------------ |
+| context       | Context 객체 |
+
+##### 적용 예시
+
+```java
+TnkSession.applicationStarted(context)
 ```
 
 ### 사용 활동 분석
