@@ -98,7 +98,7 @@
 
 Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
-**[[Unity Plugin Download v7.25.1](./sdk/tnkad-rwd.unitypackage)]**
+**[[Unity Plugin Download v7.25.1](./sdk/tnkad_rwd_072502.unitypackage)]**
 
 ### Plugin Import
 
@@ -109,6 +109,8 @@ Unity커스텀 패키지를 가져오기 위해 다음과 같은 작업이 필�
 ![unity_001](./img/unity_001.png)
 
 해당 폴더에 다음 압축파일을 다운받아 압축을 풀어주세요
+
+**[[Custom Package](./sdk/com.tnkfactory.ad.unity.zip)]**
 
 이미지와 같은 위치에 폴더와 파일이 존재하는지 확인해 주세요
 
