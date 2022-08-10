@@ -102,8 +102,25 @@ Tnk에서 제공하는 tnkad-rwd.unitypackage 파일을 다운 받습니다.
 
 ### Plugin Import
 
-적용할 Unity 프로젝트를 연 상태에서 다운로드 받은 tnkad-rwd.unitypackage 파일을 실행하면 아래와 같이 Plugin 파일들에 대한 import 창이 열립니다. 
+Unity커스텀 패키지를 가져오기 위해 다음과 같은 작업이 필요합니다.
 
+적용 할 Unity 프로젝트를 연 상태에서 다음 이미지와 같이 프로젝트의 Packages폴더를 오른 클릭 후 폴더를 열어주세요
+
+![unity_001](./img/unity_001.png)
+
+해당 폴더에 다음 압축파일을 다운받아 압축을 풀어주세요
+
+이미지와 같은 위치에 폴더와 파일이 존재하는지 확인해 주세요
+
+![unity_001](./img/unity_002.png)
+
+확인 후 다운로드 받은 tnkad-rwd.unitypackage 파일을 실행합니다.
+(또는 이미지와 같이 Import package메뉴를 통해 가져오는 방법도 가능합니다.)
+
+![unity_001](./img/unity_003.png)
+
+아래와 같이 Plugin 파일들에 대한 import 창이 열립니다. 
+ 
 ![Unity_01](./img/Unity_01.png)
 
 모두 선택된 상태에서 [import] 버튼을 누르면 Plugin 파일들이 프로젝트로 import 됩니다.
@@ -135,7 +152,7 @@ mainTemplate.gradle 파일에 TNK SDK 설정을 추가해주세요.
 
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory:rwd:7.25.1'
+    api 'com.tnkfactory:rwd:7.25.1'
 }
 ```
 
