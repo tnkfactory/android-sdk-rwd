@@ -195,7 +195,7 @@ dependencies {
       android:screenOrientation="portrait" 
       android:launchMode="singleTask" 
       android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale" 
-      android:name="com.unity3d.player.UnityPlayerNativeActivity">
+      android:name="com.unity3d.player.UnityPlayerNativeActivity" android:exported="true">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -207,8 +207,8 @@ dependencies {
     </activity>
     
     <!-- TnkAd  Offerwall Activities -->
-    <activity android:name="com.tnkfactory.ad.AdWallActivity" android:screenOrientation="sensor"/>
-    <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
+    <activity android:name="com.tnkfactory.ad.AdWallActivity" android:screenOrientation="sensor" android:exported="true"/>
+    <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape" android:exported="true"/>
     
     <!-- Set your Tnk App_ID here -->
     <meta-data android:name="tnkad_app_id" android:value="your-appid-from-tnk-site" />
@@ -254,8 +254,8 @@ Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이�
 Offerwall Activity는 보상형 광고목록이 출력되는 Activity입니다. 매체앱으로서 충전소 기능을 탑제하시려면 아래의 <activity/> 설정을 추가하셔야합니다. 
 
 ```xml
-<activity android:name="com.tnkfactory.ad.AdWallActivity" android:screenOrientation="sensor"/>
-<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
+<activity android:name="com.tnkfactory.ad.AdWallActivity" android:screenOrientation="sensor" android:exported="true"/>
+<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape" android:exported="true"/>
 ```
 
 #### UnityPlayer 설정
@@ -268,7 +268,7 @@ Unity 4.3 이상 버전을 사용하신다면 아래와 같이 ForwardNativeEven
   android:screenOrientation="portrait" 
   android:launchMode="singleTask" 
   android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale" 
-  android:name="com.tnkfactory.spaceshootler.UnityPlayerNativeActivity">
+  android:name="com.tnkfactory.spaceshootler.UnityPlayerNativeActivity" android:exported="true">
 
   <intent-filter>
     <action android:name="android.intent.action.MAIN" />
