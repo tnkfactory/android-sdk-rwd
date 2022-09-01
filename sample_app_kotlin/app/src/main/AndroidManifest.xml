@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tnkfactory.rwd.offerer">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.tnkfactory.rwd.offerer.OfferwallTemplateActivity" android:exported="true"/>
+        android:theme="@style/Theme.Offerer_kotlin_sample"
+        tools:targetApi="31">
         <activity
-            android:name="com.tnkfactory.rwd.offerer.OfferwallEmbedActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity android:name="com.tnkfactory.rwd.offerer.MainActivity" android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".viewpager.ViewPagerActivity" android:exported="true"/>
-        <activity android:name=".TabOfferwallTemplateActivity" android:exported="true"/>
-        <activity
-            android:name=".TabOfferwallEmbedActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
 
-        <activity android:name="com.tnkfactory.ad.AdWallActivity" android:exported="true"/>
-        <activity android:exported="true"
+        <activity
+            android:name=".BasicSampleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmbedSampleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomSampleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.tnkfactory.ad.AdWallActivity"
+            android:exported="true" />
+        <activity
             android:name="com.tnkfactory.ad.AdMediaActivity"
+            android:exported="true"
             android:screenOrientation="fullSensor" />
 
         <!-- App ID -->
@@ -39,4 +48,5 @@
             android:name="tnkad_app_id"
             android:value="30408070-4051-9322-2239-15040708030f" />
     </application>
+
 </manifest>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">offerer_kotlin_sample</string>
+    <string-array name="ad_type">
+        <item>all</item>
+        <item>ppi</item>
+        <item>cps</item>
+    </string-array>
+    <string-array name="ad_style">
+        <item>blue_1</item>
+        <item>blue_2</item>
+        <item>blue_3</item>
+        <item>blue_4</item>
+        <item>blue_5</item>
+        <item>blue_6</item>
+        <item>blue_7</item>
+        <item>blue_8</item>
+        <item>red_1</item>
+        <item>red_2</item>
+        <item>red_3</item>
+        <item>red_4</item>
+        <item>red_5</item>
+        <item>red_6</item>
+        <item>red_7</item>
+        <item>red_8</item>
+    </string-array>
+</resources>

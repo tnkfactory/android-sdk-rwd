@@ -1,2 +1,5 @@
 include ':app'
 rootProject.name='tnk_sample_rwd'
+
+//include ':tnkad_sdk_ppi'
+//project(':tnkad_sdk_ppi').projectDir = new File(TNKAD_SDK_PPI)
