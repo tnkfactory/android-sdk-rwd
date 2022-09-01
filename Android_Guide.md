@@ -180,7 +180,7 @@ AndroidManifest.xml의 내용 예시
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tnkfactory.adzzle2">
+    package="com.tnkfactory.tnkofferer">
 
     // 인터넷
     <uses-permission android:name="android.permission.INTERNET" />
@@ -210,7 +210,7 @@ AndroidManifest.xml의 내용 예시
         <!-- App ID -->
         <meta-data
             android:name="tnkad_app_id"
-            android:value="50c050c0-e091-84ca-ac48-190e0a07080e" />
+            android:value="30408070-4051-9322-2239-15040708030f" />
         ...
         ...
     </application>
