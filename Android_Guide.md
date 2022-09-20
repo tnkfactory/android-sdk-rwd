@@ -130,7 +130,7 @@ repositories {
 아래의 코드를 App Module의 build.gradle 파일에 추가해주세요.
 ```gradle
 dependencies {
-    implementation 'com.tnkfactory:rwd:7.29.5'
+    implementation 'com.tnkfactory:rwd:7.30.2'
 }
 ```
 ### Manifest 설정하기
@@ -169,11 +169,11 @@ Tnk 사이트에서 앱 등록하면 상단에 App ID 가 나타납니다. 이�
 
 
 ```xml
-<activity android:name="com.tnkfactory.ad.AdWallActivity" />
-<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="portrait"/>
+<activity android:name="com.tnkfactory.ad.AdWallActivity" android:exported="true"/>
+<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="portrait" android:exported="true"/>
 
 <!-- 또는 아래와 같이 설정-->
-<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="sensorLandscape"/>
+<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="sensorLandscape" android:exported="true"/>
 ```
 
 AndroidManifest.xml의 내용 예시 
@@ -214,7 +214,7 @@ AndroidManifest.xml의 내용 예시
         ...
         ...
     </application>
-</manifest>	
+</manifest>
 ```
 	
 
