@@ -66,6 +66,7 @@
 
      * [TnkLayout](#tnklayout)
        * [TnkLayout 객체](#tnklayout-객체)
+       * [피드형/아이콘형 설정하기](#피드형아이콘형-설정하기)
        * [적용예시](#적용예시-7)
       * [템플릿 디자인 제공](#템플릿-디자인-제공)
            * [사용방법 예시](#사용방법-예시)
@@ -1042,13 +1043,38 @@ TnkLayout 기능을 사용하면 화면 구성 자체를 원하는 UI로 변경�
 SDK에 포함된 템플릿 또한 TnkLayout을 이용해 구성된 UI로 어떤 형태든 원하는 UI로 변경이 가능합니다.
 
 
-
 TnkLayout을 적용하기 위한 단계는 다음과 같습니다.
 
 1. 광고 리스트 화면 구성, 리스트 Item의 화면구성(아이콘형, 피드형), 상세 팝업 화면구성을 위한 Layout을 XML로 정의합니다. 3가지 Layout XML을 모두 작성해야하는 것은 아니며 변경하기를 윈하는 Layout만 작성하시면됩니다.
 2. 작성한 Layout XML 내에서 정의한 구성 요소의 ID 들을 TnkLayout 객체에 지정합니다.
 3. 화면을 띄울때 TnkLayout 객체를 같이 전달합니다.
 
+
+#### 피드형/아이콘형 설정하기
+
+오퍼월 SDK설정 중 기본 목록을 피드형태로 출력하고 싶을 경우 아래와 같이 설정하면 
+기본 형태를 피드 형태로 출력 가능합니다. 
+
+```java
+// 이하 2가지 함수를 사용하여 호출 하실 경우 
+TnkSession.showAdList(MainActivity.this, "Basic");
+TnkSession.showAdListByType( TabOfferwallTemplateActivity.this, "Title", tnkLayout, AdListType.ALL, AdListType.PPI, AdListType.CPS)
+
+// 아래와 같이 설정하시면 기본 피드형태로 출력됩니다.
+// 탭 형태 목록의 각 탭별 기본 형태를 설정
+TnkSession.setAdWallStyle(this, 1, 900000000); 
+TnkSession.setAdWallStyle(this, 1, 900000100);
+TnkSession.setAdWallStyle(this, 1, 900000202);
+TnkSession.setAdWallStyle(this, 1, 900000307);
+
+// 그 외 이하 2가지 함수를 사용하여 호출하실 경우에는 
+TnkSession.createAdListView(this, layout);
+TnkSession.popupAdList(MainActivity.this, "Popup");
+
+// 아래와 같이 설정하시면 피드형태로 출력됩니다.
+TnkSession.setAdWallStyle(this, 1, 97); // 팝업이나 동적 생성하는 목록의 기본 형태를 설정
+
+```
 
 
 ##### TnkLayout 객체
