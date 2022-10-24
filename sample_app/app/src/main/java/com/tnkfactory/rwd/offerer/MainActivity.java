@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         TnkSession.queryPoint(this, true, new ServiceCallback() {
             @Override
             public void onReturn(Context context, Object result) {
-                Integer point = (Integer)result;
+                Integer point = (Integer) result;
                 pointView.setText(String.valueOf(point));
             }
         });
@@ -87,10 +88,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<MainListItem> itemList = new ArrayList<MainListItem>();
 
         itemList.add(MainListItem.HEADER_01);
-        itemList.add(MainListItem.BASIC);
-        itemList.add(MainListItem.POPUP_BASIC);
-        itemList.add(MainListItem.EMBED_BASIC);
-        itemList.add(MainListItem.TEMPLATE);
         itemList.add(MainListItem.TEMPLATE_TAB);
 
         itemList.add(MainListItem.HEADER_02);
@@ -112,22 +109,9 @@ public class MainActivity extends AppCompatActivity {
 
                 MainListItem item = (MainListItem) view.getTag();
                 switch (item) {
-                    case BASIC:
-                        TnkSession.showAdList(MainActivity.this, "Basic");
-                        break;
-                    case POPUP_BASIC:
-                        TnkSession.popupAdList(MainActivity.this,  "Popup");
-                        break;
-                    case EMBED_BASIC:
-                        intent = new Intent(MainActivity.this, OfferwallEmbedActivity.class);
-                        break;
-                    case TEMPLATE:
-                        intent = new Intent(MainActivity.this, OfferwallTemplateActivity.class);
-                        break;
                     case TEMPLATE_TAB:
                         intent = new Intent(MainActivity.this, TabOfferwallTemplateActivity.class);
                         break;
-
 
                     case ViewPager:
                         // 최초 1회는 TnkSession.showAgreePrivacyPopup()를 사용하여 개인정보 수집동의를 받고

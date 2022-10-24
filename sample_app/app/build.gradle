@@ -26,5 +26,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
     // Tnk RWD SDK
-    implementation "com.tnkfactory:rwd:7.29.5"
+    implementation "com.tnkfactory:rwd:7.30.2"
 }
