@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tnkfactory.ad.AdListType;
 import com.tnkfactory.ad.AgreePrivacyPopupListener;
 import com.tnkfactory.ad.Logger;
 import com.tnkfactory.ad.ServiceCallback;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<MainListItem> itemList = new ArrayList<MainListItem>();
 
         itemList.add(MainListItem.HEADER_01);
+        itemList.add(MainListItem.BASIC);
         itemList.add(MainListItem.TEMPLATE_TAB);
 
         itemList.add(MainListItem.HEADER_02);
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
 
                 MainListItem item = (MainListItem) view.getTag();
                 switch (item) {
+                    case BASIC:
+                        showBasicStyle();
+                        break;
                     case TEMPLATE_TAB:
                         intent = new Intent(MainActivity.this, TabOfferwallTemplateActivity.class);
                         break;
@@ -149,6 +154,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void showBasicStyle(){
+        TnkSession.showAdListByType(MainActivity.this, "Your title here",
+                AdListType.ALL,
+                AdListType.PPI,
+                AdListType.CPS
+        );
     }
 
     // Sample list adapter
