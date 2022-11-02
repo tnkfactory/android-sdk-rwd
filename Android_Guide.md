@@ -1945,7 +1945,7 @@ AndroidMenifest.xml 파일 내에 Tnk 앱 등록세 발급 받은 App ID를 설�
 ```gradle
 dependencies {
     ...
-    implementation 'com.android.installreferrer:installreferrer:1.1'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
     ...
 }
 ```
