@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         // 유저 식별 값 설정
         TnkSession.setUserName(MainActivity.this, "유저 식별값");
 
-        // 통계 사용시 적용, 앱 시작시 동작하는 activity에 적용 하시기 바랍니다.
+        // Analytics Report를 사용 할 경우 적용 (앱 시작시 동작하는 activity에서 호출하시기 바랍니다.)
         TnkSession.applicationStarted(this);
 
         // COPPA 설정 (true - ON / false - OFF)
