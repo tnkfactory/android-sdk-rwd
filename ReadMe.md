@@ -16,7 +16,11 @@ TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 
 [안드로이드 가이드 문서](./Android_Guide.md)
 
 ### Update Notice
-* 2022.1.17
+* 2023.01.02
+  * Android SDK v7.31.1 업데이트
+    * ANR발생 가능성 있는 함수를 background thread에서 작업을 수행 하도록 수정 
+    * 약관동의 팝업을 off시킬 수 있는 기능 추가
+* 2022.10.17
   * Android SDK v7.30.7 업데이트
     * 광고 타입에 따른 문구 추가/수정
 * 2022.09.15
