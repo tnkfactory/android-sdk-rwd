@@ -1,5 +1,12 @@
 # Tnkfactory SDK Rwd
 
+## 신규 보상형 SDK 출시 안내 (2023.02.27)
+
+새로운 보상형 SDK 가 출시되었습니다.
+여기에서 새로운 SDK 를 확인해주세요. &rightarrow; [새로운 보상형 SDK](https://github.com/tnkfactory/tnk_sdk_rwd_br)
+
+## 기존 보상형 SDK
+
 TnkAd SDK는 Tnk의 광고 네트워크 상에서 광고앱 이나 매체앱을 개발하기 위하여 제공되는 통합된 SDK이며 아래의 기능들을 사용하실 수 있습니다.
 
 * 보상형/구매형 광고의 오퍼월(Offer-wall)
